@@ -18,8 +18,6 @@ df_long = merged_df.stack().reset_index()
 df_long.columns = ['Climate Relevance', 'Year', 'Financing']
 df_long = df_long[df_long['Climate Relevance'] != 'Total Financing']
 
-st.dataframe(data=df_long)
-
 
 # Design Fig
 
