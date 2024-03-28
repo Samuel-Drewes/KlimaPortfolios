@@ -8,6 +8,9 @@ st.title('BMZ Klima Dashboard')
 # Get and process Data
 merged_df = pd.read_csv('upload_data/global_df.csv')
 
+merged_df = merged_df.set_index("Unnamed:0")
+
+
 st.dataframe(data=merged_df)
 
 df_long = merged_df.stack().reset_index()
