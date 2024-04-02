@@ -58,7 +58,7 @@ if page == 'Country Breakdown':
                                          countries,
                                            ['India', 'Brazil', 'Ukraine', 'Namibia', 'South Africa'])
     
-    selected_df = df_long[df_long['Recipient Name'].isin(selected_countries)]
+    selected_df = df_country[df_country['Recipient Name'].isin(selected_countries)]
 
     fig = px.line(selected_df, 
               x='Year', 
