@@ -6,7 +6,7 @@ import plotly.express as px
 st.title('BMZ Klima Dashboard')
 
 # Get and process Data
-merged_df = pd.read_csv('upload_data/global_df_2.csv')
+merged_df = pd.read_csv('upload_data/global_df.csv')
 
 
 merged_df = merged_df.set_index(merged_df.columns[0])
