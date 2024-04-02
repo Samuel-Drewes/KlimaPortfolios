@@ -9,7 +9,7 @@ st.title('BMZ Klima Dashboard')
 
 page = st.sidebar.selectbox('Choose your page', ['Aggregate Data', 'Country Breakdown'])
 
-# Get and process Data
+# Get and process Globe Data
 
 merged_df = pd.read_csv('upload_data/global_df.csv')
 merged_df = merged_df.set_index(merged_df.columns[0])
@@ -18,7 +18,7 @@ df_long.columns = ['Climate Relevance', 'Year', 'Financing']
 df_long = df_long[df_long['Climate Relevance'] != 'Total Financing']
 
 
-# Design Fig
+# Design Fig Globe
 
 fig = px.bar(
     df_long,
@@ -35,6 +35,14 @@ fig.update_layout(
     barmode='stack'
 )
 
+# Get and process Country Specific Data
+
+df_country = pd.read_csv('upload_data/country_specific_df.csv')[['Recipient Name', 'Year', 'Value']]
+countries = df_country['Recipient Name'].unique()
+
+
+
+
 # Display Results
 
 if page == 'Aggregate Data':
@@ -43,4 +51,21 @@ if page == 'Aggregate Data':
     st.plotly_chart(fig)
 
 if page == 'Country Breakdown':
+
     st.write('country breakdown')
+
+    selected_countries = st.multiselect('Which countries would you like to view?',
+                                         countries,
+                                           ['India', 'Brasil', 'Ukraine', 'Namibia', 'South Africa'])
+    
+    selected_df = df_long[df_long['Recipient Name'].isin(selected_countries)]
+
+    fig = px.line(selected_df, 
+              x='Year', 
+              y='Value', 
+              color='Recipient Name',
+              title='Value by Year for Selected Country',
+              labels={'Value': 'Climate Relevant Financing (%)', 'Year': 'Year'},
+              markers=True)
+    
+    st.plotly_chart(fig)
