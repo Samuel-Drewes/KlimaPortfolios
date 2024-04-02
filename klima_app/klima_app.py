@@ -56,7 +56,7 @@ if page == 'Country Breakdown':
 
     selected_countries = st.multiselect('Which countries would you like to view?',
                                          countries,
-                                           ['India', 'Brasil', 'Ukraine', 'Namibia', 'South Africa'])
+                                           ['India', 'Brazil', 'Ukraine', 'Namibia', 'South Africa'])
     
     selected_df = df_long[df_long['Recipient Name'].isin(selected_countries)]
 
