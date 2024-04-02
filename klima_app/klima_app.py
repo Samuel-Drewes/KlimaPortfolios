@@ -5,14 +5,14 @@ import plotly.express as px
 
 st.title('BMZ Klima Dashboard')
 
+page = st.sidebar.selectbox('Choose your page', ['Aggregate Data', 'Country Breakdown'])
+
 # Get and process Data
 merged_df = pd.read_csv('upload_data/global_df.csv')
 
 
 merged_df = merged_df.set_index(merged_df.columns[0])
 
-
-st.dataframe(data=merged_df)
 
 df_long = merged_df.stack().reset_index()
 df_long.columns = ['Climate Relevance', 'Year', 'Financing']
@@ -36,4 +36,10 @@ fig.update_layout(
     barmode='stack'
 )
 
-st.plotly_chart(fig)
+if page == 'Aggregate Data':
+    st.header("Aggregate Data Overview")
+    st.dataframe(data=merged_df)
+    st.plotly_chart(fig)
+
+if page == 'Country Breakdown':
+    st.write('country breakdown')
