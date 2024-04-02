@@ -52,7 +52,7 @@ if page == 'Aggregate Data':
 
 if page == 'Country Breakdown':
 
-    st.write('country breakdown')
+    st.header('Country Breakdown')
 
     selected_countries = st.multiselect('Which countries would you like to view?',
                                          countries,
