@@ -7,7 +7,7 @@ import plotly.express as px
 
 st.title('BMZ Klima Dashboard')
 
-page = st.sidebar.selectbox('Choose your page', ['Aggregate Data', 'Country Breakdown'])
+page = st.sidebar.selectbox('Choose your page', ['Aggregate Data', 'Country Breakdown', 'Country Breakdown New Logic'])
 
 # Get and process Globe Data
 
@@ -40,6 +40,10 @@ fig.update_layout(
 df_country = pd.read_csv('upload_data/country_specific_df.csv')[['Recipient Name', 'Year', 'Value']]
 countries = df_country['Recipient Name'].unique()
 
+# Get and process Country Specific Data New Methodology
+
+df_country_2 = pd.read_csv('upload_data/newmethod_country_specific_df.csv')[['Recipient Name', 'Year', 'Value']]
+countries_2 = df_country_2['Recipient Name'].unique()
 
 
 
@@ -59,6 +63,26 @@ if page == 'Country Breakdown':
                                            ['India', 'Brazil', 'Ukraine', 'Namibia', 'South Africa'])
     
     selected_df = df_country[df_country['Recipient Name'].isin(selected_countries)]
+
+    fig = px.line(selected_df, 
+              x='Year', 
+              y='Value', 
+              color='Recipient Name',
+              title='Value by Year for Selected Country',
+              labels={'Value': 'Climate Relevant Financing (%)', 'Year': 'Year'},
+              markers=True)
+    
+    st.plotly_chart(fig)
+
+if page == 'Country Breakdown New Logic':
+
+    st.header('Country Breakdown New Logic')
+
+    selected_countries = st.multiselect('Which countries would you like to view?',
+                                         countries_2,
+                                           ['India', 'Brazil', 'Ukraine', 'Namibia', 'South Africa'])
+    
+    selected_df = df_country_2[df_country_2['Recipient Name'].isin(selected_countries)]
 
     fig = px.line(selected_df, 
               x='Year', 
