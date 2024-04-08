@@ -44,9 +44,8 @@ countries = all_country_df['Recipient Name'].unique()
 # Display Results
 
 if page == 'Global Data':
+
     st.header("Global Data Overview")
-
-
 
     # Globe Stacked 
     
