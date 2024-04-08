@@ -123,10 +123,7 @@ if page == 'Country Breakdown':
     selected_columns = [col for col in all_country_df.columns if col.startswith('amount_') or col.startswith('clim_rel_amount_')]
     filtered_df = all_country_df[selected_columns]
     sums = filtered_df.sum()
-    sum_df = filtered_df.append(sums, ignore_index=True)
-
-
-    sum_df = sum_df.loc[[sum_df.index[-1]]]
+    sum_df = pd.DataFrame(sums).transpose()
 
     st.dataframe(sum_df)
 
