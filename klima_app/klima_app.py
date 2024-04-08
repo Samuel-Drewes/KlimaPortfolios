@@ -66,6 +66,14 @@ fig_globe_waterfall.update_layout(
 
 if page == 'Global Data':
     st.header("Global Data Overview")
+
+    from_year, to_year = st.slider(
+    'Select Years',
+    min_value=2013,
+    max_value=2015,
+    value=[2013, 2015])
+
+
     st.plotly_chart(fig_globe_bar)
     st.plotly_chart(fig_globe_waterfall)
 
