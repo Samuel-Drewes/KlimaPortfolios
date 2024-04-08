@@ -129,7 +129,7 @@ if page == 'Country Breakdown':
     sums = filtered_df.sum()
     sum_df = pd.DataFrame(sums).transpose()
 
-    # Created Stacked Bar
+    # Created Sum_DF
 
     years = range(from_year, to_year)
     for year in years:
@@ -137,6 +137,9 @@ if page == 'Country Breakdown':
         clim_rel_amount_col = f'clim_rel_amount_{year}'
         non_clim_col = f'non_clim_amount_{year}'
         sum_df[non_clim_col] = sum_df[amount_col] - sum_df[clim_rel_amount_col]
+
+
+    # Create Stacked Bar
 
     melted_df = sum_df.melt(value_vars=[f'clim_rel_amount_{year}' for year in years] + 
                                 [f'non_clim_amount_{year}' for year in years],
@@ -159,6 +162,53 @@ if page == 'Country Breakdown':
     st.plotly_chart(fig_sel_bar)
 
 
+    # Create Waterfall
+
+    years = [col.split('_')[-1] for col in sum_df.columns if col.startswith('amount_')]
+
+    for year in years:
+        amount_col = f'amount_{year}'
+        clim_rel_amount_col = f'clim_rel_amount_{year}'
+        clim_rel_percent_col = f'clim_rel_percent_{year}'
+        
+        sum_df[clim_rel_percent_col] = (sum_df[clim_rel_amount_col] / sum_df[amount_col]) * 100
+        
+    selected_columns = [col for col in sum_df.columns if col.startswith('clim_rel_percent_')]
+    filtered_df = sum_df[selected_columns]
+
+
+    melted_df = filtered_df.reset_index().melt(id_vars=['index'], var_name='Year', value_name='Percentage')
+
+    melted_df['Year'] = melted_df['Year'].str.replace('clim_rel_percent_', '')
+
+    melted_df = melted_df.drop(columns = 'index')
+    melted_df['Change'] = melted_df['Percentage'].diff()
+
+    initial_value = melted_df['Percentage'].iloc[0] - melted_df['Change'].iloc[1] # Subtract the first actual change to get the starting point
+
+
+    fig_sel_waterfall = go.Figure(go.Waterfall(
+        name = "20", orientation = "v",
+        measure = ["absolute"] + ["relative"] * (len(melted_df) - 1), # The first measure is absolute, others are relative
+        x = melted_df['Year'].astype(str),
+        textposition = "outside",
+        text = melted_df['Change'].round(2).astype(str),
+        y = [initial_value] + melted_df['Change'].tolist()[1:], # The initial value plus the changes
+        connector = {"line":{"color":"rgb(63, 63, 63)"}},
+    ))
+
+    fig_sel_waterfall.update_layout(
+            title = {
+                'text': "Yearly Percentage Change in Climate Finance for Selected Countries",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'},
+            xaxis = {"type":"category"},
+            yaxis = {"title":"Percentage"},
+    )
+
+    st.plotly_chart(fig_sel_waterfall)
     st.dataframe(sum_df)
 
 if page == 'Country Comparison':
