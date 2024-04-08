@@ -57,6 +57,9 @@ if page == 'Global Data':
 
     # Design Fig Globe Waterfall
 
+    globe_waterfall_df = globe_waterfall_df[globe_waterfall_df['Year'].between(from_year,to_year)]
+
+
     initial_value = globe_waterfall_df['Percentage'].iloc[0] - globe_waterfall_df['Change'].iloc[1] # Subtract the first actual change to get the starting point
 
 
