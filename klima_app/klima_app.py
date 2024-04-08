@@ -9,7 +9,17 @@ import plotly.graph_objects as go
 
 st.title('BMZ Klima Dashboard')
 
+# Slider
+
+from_year, to_year = st.slider(
+'Select Years',
+min_value=2013,
+max_value=2022,
+value=[2013, 2022])
+
 page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison'])
+
+
 
 # Get Globe Barchart Data
 
@@ -35,13 +45,7 @@ full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 if page == 'Global Data':
     st.header("Global Data Overview")
 
-    # Slider
 
-    from_year, to_year = st.slider(
-    'Select Years',
-    min_value=2013,
-    max_value=2022,
-    value=[2013, 2022])
 
     # Globe Stacked 
     
@@ -97,7 +101,7 @@ if page == 'Global Data':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.write(f"% Change in Climate finance between {from_year} and {to_year} was {change_perc}%")
+    st.write(f"The total % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
 
     # DF to show
 
