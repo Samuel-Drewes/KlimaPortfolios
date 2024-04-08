@@ -23,7 +23,7 @@ globe_df = pd.read_csv('upload_data/globe_df')
 
 # Design Fig Globe
 
-fig = px.bar(read_df, x='Year', y='Amount', color='Type',
+fig = px.bar(globe_df, x='Year', y='Amount', color='Type',
             title='Global Financing Totals',
             labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
             category_orders={'Type': ['Other Funds','Climate Finance']},
