@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+
 
 # Overview
 
@@ -9,27 +11,53 @@ st.title('BMZ Klima Dashboard')
 
 page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison'])
 
-# Get Globe Data
-
-# merged_df = pd.read_csv('upload_data/global_df.csv')
-# merged_df = merged_df.set_index(merged_df.columns[0])
-# df_long = merged_df.stack().reset_index()
-# df_long.columns = ['Climate Relevance', 'Year', 'Financing']
-# df_long = df_long[df_long['Climate Relevance'] != 'Total Financing']
+# Get Globe Barchart Data
 
 globe_df = pd.read_csv('upload_data/globe_df')
 
+# Get Globe Waterfall Data
+
+globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
 
 
-# Design Fig Globe
+# Design Fig Globe Bar
 
-fig = px.bar(globe_df, x='Year', y='Amount', color='Type',
+fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
             title='Global Financing Totals',
             labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
             category_orders={'Type': ['Other Funds','Climate Finance']},
             color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
-fig.update_layout(title_x=0.5)
+fig_globe_bar.update_layout(title_x=0.5)
+
+# Design Fig Globe Waterfall
+
+initial_value = globe_waterfall_df['Percentage'].iloc[0] - globe_waterfall_df['Change'].iloc[1] # Subtract the first actual change to get the starting point
+
+
+fig_globe_waterfall = go.Figure(go.Waterfall(
+    name = "20", orientation = "v",
+    measure = ["absolute"] + ["relative"] * (len(df) - 1), # The first measure is absolute, others are relative
+    x = globe_waterfall_df['Year'].astype(str),
+    textposition = "outside",
+    text = globe_waterfall_df['Change'].round(2).astype(str),
+    y = [initial_value] + globe_waterfall_df['Change'].tolist()[1:], # The initial value plus the changes
+    connector = {"line":{"color":"rgb(63, 63, 63)"}},
+))
+
+fig_globe_waterfall.update_layout(
+        title = {
+            'text': "Yearly Percentage Change in Climate Finance",
+            'y':0.9,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis = {"type":"category"},
+        yaxis = {"title":"Percentage"},
+)
+
+
+
 
 # # Get and process Country Specific Data
 
@@ -47,7 +75,8 @@ fig.update_layout(title_x=0.5)
 
 if page == 'Global Data':
     st.header("Global Data Overview")
-    st.plotly_chart(fig)
+    st.plotly_chart(fig_globe_bar)
+    st.plotly_chart(fig_globe_waterfall)
 
 if page == 'Country Breakdown':
 
