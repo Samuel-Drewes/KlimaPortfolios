@@ -151,7 +151,7 @@ if page == 'Country Breakdown':
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
     fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
-                title='Global Financing Totals',
+                title='Financing Totals for Selected Countries',
                 labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
