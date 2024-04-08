@@ -49,9 +49,9 @@ if page == 'Global Data':
     st.header("Global Data Overview")
     st.plotly_chart(fig)
 
-# if page == 'Country Breakdown':
+if page == 'Country Breakdown':
 
-#     st.header('Country Breakdown')
+    st.header('Country Breakdown')
 
 #     selected_countries = st.multiselect('Which countries would you like to view?',
 #                                          countries,
@@ -69,9 +69,9 @@ if page == 'Global Data':
     
 #     st.plotly_chart(fig)
 
-# if page == 'Country Breakdown New Logic':
+if page == 'Country Comparison':
 
-#     st.header('Country Breakdown New Logic')
+    st.header('Country Comparison')
 
 #     selected_countries = st.multiselect('Which countries would you like to view?',
 #                                          countries_2,
