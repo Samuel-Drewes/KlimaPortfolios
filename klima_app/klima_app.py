@@ -120,13 +120,53 @@ if page == 'Country Breakdown':
         countries,
         ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
     
+
+    #Filter by country
     all_country_df = all_country_df[all_country_df['Recipient Name'].isin(selected_countries)]
 
-
+    # Get Sum_df
     selected_columns = [col for col in all_country_df.columns if col.startswith('amount_') or col.startswith('clim_rel_amount_')]
     filtered_df = all_country_df[selected_columns]
     sums = filtered_df.sum()
     sum_df = pd.DataFrame(sums).transpose()
+
+    # Created Stacked Bar
+
+    years = range(from_year, to_year)
+    for year in years:
+        amount_col = f'amount_{year}'
+        clim_rel_amount_col = f'clim_rel_amount_{year}'
+        non_clim_col = f'non_clim_amount_{year}'
+        sum_df[non_clim_col] = sum_df[amount_col] - sum_df[clim_rel_amount_col]
+
+    # Step 2: Melt the dataframe for plotting
+    # Including both climatic and non-climatic amounts
+    melted_df = sum_df.melt(value_vars=[f'clim_rel_amount_{year}' for year in years] + 
+                                [f'non_clim_amount_{year}' for year in years],
+                                var_name='Type_Year', value_name='Amount')
+
+
+
+    # Split 'Type_Year' into separate 'Year' and 'Type' columns
+    melted_df['Year'] = melted_df['Type_Year'].apply(lambda x: x.split('_')[-1])
+    melted_df['Type'] = melted_df['Type_Year'].apply(lambda x: 'Climate Finance' if 'clim_rel_amount' in x else 'Other Funds')
+
+    melted_df['Amount'] = melted_df['Amount'] * 1_000_000
+
+
+
+
+    fig = px.bar(melted_df, x='Year', y='Amount', color='Type',
+                title='Global Financing Totals',
+                labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
+                category_orders={'Type': ['Other Funds','Climate Finance']},
+                color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
+
+    fig.update_layout(title_x=0.5)
+
+
+
+
 
     st.dataframe(sum_df)
 
