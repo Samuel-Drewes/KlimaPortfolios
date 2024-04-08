@@ -139,33 +139,25 @@ if page == 'Country Breakdown':
         non_clim_col = f'non_clim_amount_{year}'
         sum_df[non_clim_col] = sum_df[amount_col] - sum_df[clim_rel_amount_col]
 
-    # Step 2: Melt the dataframe for plotting
-    # Including both climatic and non-climatic amounts
     melted_df = sum_df.melt(value_vars=[f'clim_rel_amount_{year}' for year in years] + 
                                 [f'non_clim_amount_{year}' for year in years],
                                 var_name='Type_Year', value_name='Amount')
 
-
-
-    # Split 'Type_Year' into separate 'Year' and 'Type' columns
     melted_df['Year'] = melted_df['Type_Year'].apply(lambda x: x.split('_')[-1])
     melted_df['Type'] = melted_df['Type_Year'].apply(lambda x: 'Climate Finance' if 'clim_rel_amount' in x else 'Other Funds')
 
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
-
-
-
-    fig = px.bar(melted_df, x='Year', y='Amount', color='Type',
+    fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
                 title='Global Financing Totals',
                 labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
-    fig.update_layout(title_x=0.5)
+    fig_sel_bar.update_layout(title_x=0.5)
 
 
-
+    st.plotly_chart(fig_sel_bar)
 
 
     st.dataframe(sum_df)
