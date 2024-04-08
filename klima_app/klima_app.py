@@ -37,7 +37,7 @@ initial_value = globe_waterfall_df['Percentage'].iloc[0] - globe_waterfall_df['C
 
 fig_globe_waterfall = go.Figure(go.Waterfall(
     name = "20", orientation = "v",
-    measure = ["absolute"] + ["relative"] * (len(df) - 1), # The first measure is absolute, others are relative
+    measure = ["absolute"] + ["relative"] * (len(globe_waterfall_df) - 1), # The first measure is absolute, others are relative
     x = globe_waterfall_df['Year'].astype(str),
     textposition = "outside",
     text = globe_waterfall_df['Change'].round(2).astype(str),
