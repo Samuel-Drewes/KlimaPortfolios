@@ -120,6 +120,9 @@ if page == 'Country Breakdown':
         countries,
         ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
     
+    all_country_df = all_country_df[all_country_df['Recipient Name'].isin(selected_countries)]
+
+
     selected_columns = [col for col in all_country_df.columns if col.startswith('amount_') or col.startswith('clim_rel_amount_')]
     filtered_df = all_country_df[selected_columns]
     sums = filtered_df.sum()
