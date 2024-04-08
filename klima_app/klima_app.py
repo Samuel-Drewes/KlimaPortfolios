@@ -13,22 +13,22 @@ page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdo
 
 # Get Globe Barchart Data
 
-globe_df = pd.read_csv('upload_data/globe_df')
+# globe_df = pd.read_csv('upload_data/globe_df')
 
 # Get Globe Waterfall Data
 
-globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
+# globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
 
 
 # Design Fig Globe Bar
 
-fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
-            title='Global Financing Totals',
-            labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
-            category_orders={'Type': ['Other Funds','Climate Finance']},
-            color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
+# fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
+#             title='Global Financing Totals',
+#             labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
+#             category_orders={'Type': ['Other Funds','Climate Finance']},
+#             color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
-fig_globe_bar.update_layout(title_x=0.5)
+# fig_globe_bar.update_layout(title_x=0.5)
 
 # Design Fig Globe Waterfall
 
@@ -66,7 +66,7 @@ fig_globe_bar.update_layout(title_x=0.5)
 
 if page == 'Global Data':
     st.header("Global Data Overview")
-    st.plotly_chart(fig_globe_bar)
+    # st.plotly_chart(fig_globe_bar)
     # st.plotly_chart(fig_globe_waterfall)
 
 if page == 'Country Breakdown':
