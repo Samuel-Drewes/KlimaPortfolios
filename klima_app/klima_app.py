@@ -101,7 +101,7 @@ if page == 'Global Data':
 
     # DF to show
 
-    full_globe_df = full_globe_df[full_globe_df.index.between(from_year,to_year)]
+    full_globe_df = full_globe_df[full_globe_df['Year'].between(from_year,to_year)]
 
     st.dataframe(full_globe_df)
 
