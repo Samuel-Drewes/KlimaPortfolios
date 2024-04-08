@@ -20,8 +20,10 @@ globe_df = pd.read_csv('upload_data/globe_df')
 globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
 
 
+# DF to Show
 
 
+full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 
 
 
@@ -96,6 +98,13 @@ if page == 'Global Data':
     change_perc = round(to_val-from_val, 3)
 
     st.write(f"% Change in Climate finance between {from_year} and {to_year} was {change_perc}%")
+
+    # DF to show
+
+    full_globe_df = full_globe_df[full_globe_df.index.between(from_year,to_year)]
+
+    st.dataframe(full_globe_df)
+
 
 if page == 'Country Breakdown':
 
