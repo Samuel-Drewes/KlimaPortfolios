@@ -29,13 +29,14 @@ globe_df = pd.read_csv('upload_data/globe_df')
 
 globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
 
-
-# DF to Show
-
+# Get DF to Show
 
 full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 
+# Get all country DF
 
+all_country_df = pd.read_csv("upload_data/all_country_df.csv")
+countries = all_country_df['Recipient Name'].unique()
 
 
 
@@ -114,7 +115,10 @@ if page == 'Country Breakdown':
 
     st.header('Country Breakdown')
 
-
+    selected_countries = st.multiselect(
+        'Which countries would you like to view?',
+        countries,
+        ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
 
 if page == 'Country Comparison':
 
