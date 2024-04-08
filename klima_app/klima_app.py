@@ -86,6 +86,17 @@ if page == 'Global Data':
 
     st.plotly_chart(fig_globe_waterfall)
 
+
+    # Percentage Text
+
+    from_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == from_year]['Percentage'])
+    to_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == to_year]['Percentage'])
+
+
+    change_perc = round(to_val-from_val, 3)
+
+    st.write(f"% Change in Climate finance between {from_year} and {to_year} was {change_perc}%")
+
 if page == 'Country Breakdown':
 
     st.header('Country Breakdown')
