@@ -119,6 +119,16 @@ if page == 'Country Breakdown':
         'Which countries would you like to view?',
         countries,
         ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
+    
+    selected_columns = [col for col in all_country_df.columns if col.startswith('amount_') or col.startswith('clim_rel_amount_')]
+    filtered_df = all_country_df[selected_columns]
+    sums = filtered_df.sum()
+    sum_df = filtered_df.append(sums, ignore_index=True)
+
+
+    sum_df = sum_df.loc[[sum_df.index[-1]]]
+
+    st.dataframe(sum_df)
 
 if page == 'Country Comparison':
 
