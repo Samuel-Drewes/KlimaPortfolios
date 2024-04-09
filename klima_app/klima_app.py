@@ -67,7 +67,7 @@ if page == 'Global Data':
 
     fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
                 title='Global Financing Totals',
-                labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
+                labels={'Amount': 'Financing Amount ($)', 'Year': 'Year'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
@@ -155,7 +155,7 @@ if page == 'Country Breakdown':
 
     fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
                 title='Financing Totals for Selected Countries',
-                labels={'Amount': 'Financing Amount (Euros)', 'Year': 'Year'},
+                labels={'Amount': 'Financing Amount ($)', 'Year': 'Year'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
