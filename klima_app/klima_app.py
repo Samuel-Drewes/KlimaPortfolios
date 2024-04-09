@@ -17,7 +17,7 @@ min_value=2013,
 max_value=2022,
 value=[2013, 2022])
 
-page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison'])
+page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison', 'Methodik Erklärung'])
 
 
 
@@ -287,3 +287,23 @@ if page == 'Country Comparison':
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
 
+if page == 'Methodik Erklärung':
+
+    st.header("Erklärung Methode")
+
+    st.write("""
+    Quelle: OECD CRS Datenbank (Daten bis einschließlich 2022)
+    Bilaterale Entwicklungszusammenarbeit
+    Finanzierungstyp: ODA Auszahlungen (konstante Preise; in Million USD)
+    Geber: Deutschland
+    Geberorganisation: BMZ (nur BMZ Haushalt)
+    Finanzierungsarten:
+    - Standard Grant
+    - Standard Loan
+    - Common Equity
+    - Shares in collective investement vehicles
+    - Debt forgiveness: ODA claims (P)
+    - Debt forgiveness: ODA claims (I)
+    - Debt rescheduling: ODA claims (I)
+
+""")
