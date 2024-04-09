@@ -256,7 +256,7 @@ if page == 'Country Comparison':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Ranking of Selected Countries")
+    st.subheader("Ranking of Selected Countries for Time Period")
     st.dataframe(ranked_df)
 
     # Top 10 Bottom 10 Ranking
@@ -282,7 +282,7 @@ if page == 'Country Comparison':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Top and Bottom 10 Countries for Time Period")
+    st.subheader("Top and Bottom 10 Countries for all Countries in selected Time Period")
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
