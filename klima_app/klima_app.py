@@ -56,7 +56,7 @@ if page == 'Global Data':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.subheader(f"The total % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
+    st.subheader(f"The global % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
 
 
     # Globe Stacked 
@@ -132,7 +132,7 @@ if page == 'Country Breakdown':
 
     # Created Sum_DF
 
-    years = range(from_year, to_year)
+    years = range(from_year, (to_year + 1))
     for year in years:
         amount_col = f'amount_{year}'
         clim_rel_amount_col = f'clim_rel_amount_{year}'
