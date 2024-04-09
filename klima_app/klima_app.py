@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from PIL import Image
+
 
 
 # Overview
@@ -311,4 +313,7 @@ if page == 'Methodik Erklärung':
     
     st.header("Anrechnung Klimafinanzierung")
 
-    st.image.open("upload_data/methodiktable")
+    image = Image.open('upload_data/methodiktable')
+
+    st.image(image, caption='Enter any caption here')
+
