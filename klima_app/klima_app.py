@@ -240,11 +240,11 @@ if page == 'Country Comparison':
 
     # Df Ranking
 
-    from_values = country_compare_df[country_compare_df['Year'] == str(from_year)]\
+    from_values = country_compare_df[country_compare_df['Year'] == from_year]\
         .sort_values(by = 'Recipient Name')\
         .reset_index()['Value']
 
-    to_values = country_compare_df[country_compare_df['Year'] == str(to_year)]\
+    to_values = country_compare_df[country_compare_df['Year'] == to_year]\
             .sort_values(by = 'Recipient Name')\
             .reset_index()['Value']
 
