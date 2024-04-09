@@ -226,6 +226,7 @@ if page == 'Country Comparison':
 
     country_compare_df = country_compare_df[country_compare_df['Year'].between(from_year,to_year)]
 
+    # Line Graph
 
     fig_country_compare = px.line(country_compare_df, 
                 x='Year', 
@@ -236,3 +237,26 @@ if page == 'Country Comparison':
                 markers=True)
 
     st.plotly_chart(fig_country_compare)
+
+    # Df Ranking
+
+    from_values = country_compare_df[country_compare_df['Year'] == str(from_year)]\
+        .sort_values(by = 'Recipient Name')\
+        .reset_index()['Value']
+
+    to_values = country_compare_df[country_compare_df['Year'] == str(to_year)]\
+            .sort_values(by = 'Recipient Name')\
+            .reset_index()['Value']
+
+    index_countries = list(country_compare_df[country_compare_df['Year'] == to_year].sort_values(by = 'Recipient Name')['Recipient Name'])
+
+    values_countries = to_values - from_values
+
+    values_countries.index = index_countries
+
+    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
+            .sort_values('% Change in Period', ascending = False)
+
+
+
+
