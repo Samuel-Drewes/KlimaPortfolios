@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 # Overview
 
 st.title('BMZ Klima Dashboard')
+st.title(':red[_Prototype_ Data has not been validated]')
 
 # Slider
 
@@ -310,4 +311,4 @@ if page == 'Methodik Erklärung':
     
     st.header("Anrechnung Klimafinanzierung")
 
-    st.image("upload_data/methodiktable")
+    st.image.open("upload_data/methodiktable")
