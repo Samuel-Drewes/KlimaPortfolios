@@ -210,7 +210,7 @@ if page == 'Country Breakdown':
     )
 
     st.plotly_chart(fig_sel_waterfall)
-    st.dataframe(sum_df)
+    st.dataframe(all_country_df)
 
 if page == 'Country Comparison':
 
