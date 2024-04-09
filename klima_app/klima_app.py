@@ -23,7 +23,7 @@ page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdo
 
 # Get Globe Barchart Data
 
-globe_df = pd.read_csv('upload_data/globe_df')
+globe_df = pd.read_csv('upload_data/globe_df.csv')
 
 # Get Globe Waterfall Data
 
@@ -38,7 +38,9 @@ full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 all_country_df = pd.read_csv("upload_data/all_country_df.csv")
 countries = all_country_df['Recipient Name'].unique()
 
+# Country compare DF
 
+country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
 
 
 # Display Results
@@ -165,7 +167,6 @@ if page == 'Country Breakdown':
 
     # Create Waterfall
 
-    # years = [col.split('_')[-1] for col in sum_df.columns if col.startswith('amount_')]
 
     for year in years:
         amount_col = f'amount_{year}'
@@ -216,3 +217,22 @@ if page == 'Country Comparison':
 
     st.header('Country Comparison')
 
+    selected_countries = st.multiselect(
+    'Which countries would you like to view?',
+    countries,
+    ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
+
+    country_compare_df = country_compare_df[country_compare_df['Recipient Name'].isin(selected_countries)]
+
+    country_compare_df = country_compare_df[country_compare_df['Year'].between(from_year,to_year)]
+
+
+    fig_country_compare = px.line(country_compare_df, 
+                x='Year', 
+                y='Value', 
+                color='Recipient Name',
+                title='Value by Year for Selected Country',
+                labels={'Value': 'Climate Relevant Financing (%)', 'Year': 'Year'},
+                markers=True)
+
+    st.plotly_chart(fig_country_compare)
