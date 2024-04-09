@@ -258,5 +258,5 @@ if page == 'Country Comparison':
             .sort_values('% Change in Period', ascending = False)
 
 
-
+    st.dataframe(ranked_df)
 
