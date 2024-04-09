@@ -47,6 +47,18 @@ if page == 'Global Data':
 
     st.header("Global Data Overview")
 
+    # Text %
+
+    globe_waterfall_df = globe_waterfall_df[globe_waterfall_df['Year'].between(from_year,to_year)]
+
+    from_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == from_year]['Percentage'])
+    to_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == to_year]['Percentage'])
+
+    change_perc = round(to_val-from_val, 3)
+
+    st.subheader(f"The total % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
+
+
     # Globe Stacked 
     
     globe_df = globe_df[globe_df['Year'].between(from_year,to_year)]
@@ -62,8 +74,6 @@ if page == 'Global Data':
     st.plotly_chart(fig_globe_bar)
 
     # Design Fig Globe Waterfall
-
-    globe_waterfall_df = globe_waterfall_df[globe_waterfall_df['Year'].between(from_year,to_year)]
 
 
     initial_value = globe_waterfall_df['Percentage'].iloc[0] - globe_waterfall_df['Change'].iloc[1] # Subtract the first actual change to get the starting point
@@ -93,15 +103,6 @@ if page == 'Global Data':
     st.plotly_chart(fig_globe_waterfall)
 
 
-    # Percentage Text
-
-    from_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == from_year]['Percentage'])
-    to_val = float(globe_waterfall_df[globe_waterfall_df['Year'] == to_year]['Percentage'])
-
-
-    change_perc = round(to_val-from_val, 3)
-
-    st.write(f"The total % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
 
     # DF to show
 
