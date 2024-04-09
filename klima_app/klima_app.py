@@ -250,6 +250,31 @@ if page == 'Country Comparison':
 
     index_countries = list(country_compare_df[country_compare_df['Year'] == to_year].sort_values(by = 'Recipient Name')['Recipient Name'])
 
+    values_countries = (to_values - from_values)*100
+    values_countries.index = index_countries
+
+    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
+            .sort_values('% Change in Period', ascending = False)
+
+    st.subheader("Ranking of Selected Countries")
+    st.dataframe(ranked_df)
+
+    # Top 10 Bottom 10 Ranking
+
+    country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
+
+    country_compare_df = country_compare_df[country_compare_df['Year'].between(from_year,to_year)]
+
+    from_values = country_compare_df[country_compare_df['Year'] == from_year]\
+        .sort_values(by = 'Recipient Name')\
+        .reset_index()['Value']
+
+    to_values = country_compare_df[country_compare_df['Year'] == to_year]\
+            .sort_values(by = 'Recipient Name')\
+            .reset_index()['Value']
+
+    index_countries = list(country_compare_df[country_compare_df['Year'] == to_year].sort_values(by = 'Recipient Name')['Recipient Name'])
+
     values_countries = to_values - from_values
 
     values_countries.index = index_countries
@@ -257,6 +282,8 @@ if page == 'Country Comparison':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
+    st.subheader("Top and Bottom 10 Countries for Time Period")
 
-    st.dataframe(ranked_df)
+    st.dataframe(ranked_df.dropna().head(10))
+    st.dataframe(ranked_df.dropna().tail(10))
 
