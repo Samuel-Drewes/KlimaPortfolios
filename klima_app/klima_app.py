@@ -165,7 +165,7 @@ if page == 'Country Breakdown':
 
     # Create Waterfall
 
-    years = [col.split('_')[-1] for col in sum_df.columns if col.startswith('amount_')]
+    # years = [col.split('_')[-1] for col in sum_df.columns if col.startswith('amount_')]
 
     for year in years:
         amount_col = f'amount_{year}'
