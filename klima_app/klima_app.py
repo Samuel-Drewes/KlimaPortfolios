@@ -313,7 +313,7 @@ if page == 'Methodik Erklärung':
     
     st.header("Anrechnung Klimafinanzierung")
 
-    image = Image.open('upload_data/methodiktable')
+    image = Image.open('../../../upload_data/methodiktable')
 
     st.image(image, caption='Enter any caption here')
 
