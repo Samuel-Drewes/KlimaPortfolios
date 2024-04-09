@@ -307,3 +307,7 @@ if page == 'Methodik Erklärung':
     - Debt rescheduling: ODA claims (I)
 
 """)
+    
+    st.header("Anrechnung Klimafinanzierung")
+
+    st.image("upload_data/methodiktable")
