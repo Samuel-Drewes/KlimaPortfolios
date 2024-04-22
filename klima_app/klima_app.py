@@ -328,10 +328,10 @@ if page == 'Sektoranalyse':
     year_select.append('Sector')
     filtered_year_df = sector_df[year_select]
 
-    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{year}', title='Climate Related Amount by Sector')
-    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{year}', title='Non Climate Related Amount by Sector')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{year}', title='Climate Apaptation Amount by Sector')
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{year}', title='Climate Mitigation Amount by Sector')
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{year_select}', title='Climate Related Amount by Sector')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{year_select}', title='Non Climate Related Amount by Sector')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{year_select}', title='Climate Apaptation Amount by Sector')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{year_select}', title='Climate Mitigation Amount by Sector')
 
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
