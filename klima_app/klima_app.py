@@ -28,6 +28,10 @@ page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdo
 
 globe_df = pd.read_csv('upload_data/globe_df.csv')
 
+# Get Globe Split Data
+
+split_df = pd.read_csv('upload_data/split_globe.csv')
+
 # Get Globe Waterfall Data
 
 globe_waterfall_df = pd.read_csv('upload_data/globe_waterfall.csv')
@@ -77,6 +81,23 @@ if page == 'Global Data':
     fig_globe_bar.update_layout(title_x=0.5)
 
     st.plotly_chart(fig_globe_bar)
+
+    # Globe Split
+
+    split_df = split_df[split_df['Year'].between(from_year,to_year)]
+
+    fig_split = px.bar(split_df, x='Year', y='Amount', color='Type',
+            title='Globale Finanzierungssummen',
+            labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
+            category_orders={'Type': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+            color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
+            )# This ensures consistent color ordering
+
+    fig_split.update_layout(title_x=0.5)
+
+    st.plotly_chart(fig_split)
+
+
 
     # Design Fig Globe Waterfall
 
