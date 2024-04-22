@@ -20,7 +20,7 @@ min_value=2013,
 max_value=2022,
 value=[2013, 2022])
 
-page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison', 'Methodik Erklärung'])
+page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison', 'Sektoranalyse','Methodik Erklärung'])
 
 
 
@@ -48,6 +48,10 @@ countries = all_country_df['Recipient Name'].unique()
 # Country compare DF
 
 country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
+
+# Sektoranalyse DF
+
+sector_df = pd.read_csv('upload_data/sector_analysis.csv')
 
 
 # Display Results
@@ -310,6 +314,29 @@ if page == 'Country Comparison':
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
+
+if page == 'Sektoranalyse':
+
+    selected_year = st.slider(
+    'Select Year',
+    min_value=2013,
+    max_value=2022,
+    value=2022
+    )
+
+    year_select = [col for col in sector_df.columns if col.endswith(f'{selected_year}')]
+    year_select.append('Sector')
+    filtered_year_df = sector_df[year_select]
+
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{year}', title='Climate Related Amount by Sector')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{year}', title='Non Climate Related Amount by Sector')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{year}', title='Climate Apaptation Amount by Sector')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{year}', title='Climate Mitigation Amount by Sector')
+
+    st.plotly_chart(clim_rel_fig)
+    st.plotly_chart(non_clim_fig)
+    st.plotly_chart(clim_adapt_fig)
+    st.plotly_chart(clim_miti_fig)
 
 if page == 'Methodik Erklärung':
 
