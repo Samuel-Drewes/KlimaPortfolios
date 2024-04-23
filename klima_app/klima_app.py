@@ -3,16 +3,14 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from PIL import Image
-
 
 
 # Overview
 
-st.title('BMZ Klima Dashboard')
-st.title(':red[_Prototype_ Data has not been validated]')
+st.title('BMZ Klima-Dashboard')
+st.header(':red[_Prototyp_ Daten noch nicht validiert]')
 
-page = st.sidebar.selectbox('Choose your page', ['Gesamtübersicht', 'Länderanalyse', 'Ländervergleich', 'Sektoranalyse Global', 'Sektoranalyse pro Land','Methodik Erklärung'])
+page = st.sidebar.selectbox('Seitenauswahl', ['Gesamtübersicht', 'Länderanalyse', 'Ländervergleich', 'Sektoranalyse Global', 'Sektoranalyse pro Land','Methodik Erklärung'])
 
 
 
@@ -69,7 +67,7 @@ if page == 'Gesamtübersicht':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.subheader(f"The global % change in Climate Finance between {from_year} and {to_year} was {change_perc}%")
+    st.subheader(f"Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%")
 
 
     # Globe Stacked 
@@ -77,8 +75,8 @@ if page == 'Gesamtübersicht':
     globe_df = globe_df[globe_df['Year'].between(from_year,to_year)]
 
     fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
-                title='Global Financing Totals',
-                labels={'Amount': 'Financing Amount ($)', 'Year': 'Year'},
+                title='Globale Finanzierungssummen',
+                labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
