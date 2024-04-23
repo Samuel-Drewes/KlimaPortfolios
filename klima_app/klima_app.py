@@ -77,8 +77,8 @@ if page == 'Gesamtübersicht':
     fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
                 title='Globale Finanzierungssummen',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-                category_orders={'Type': ['Other Funds','Climate Finance']},
-                color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
+                category_orders={'Type': ['Andere ODA','Klimafinanzierung']},
+                color_discrete_map={'Andere ODA': 'orange', 'Klimafinanzierung': 'green'})# This ensures consistent color ordering
 
     fig_globe_bar.update_layout(title_x=0.5)
 
