@@ -368,11 +368,12 @@ if page == 'Sektoranalyse pro Land':
     max_value=2022,
     value=2022
     )
+    countries_list = countries.tolist()
 
     selected_country = st.selectbox(
-    'Welches Land möchten Sie einblicken?',
-    countries,
-    ['India'])
+        'Welches Land möchten Sie einblicken?',
+        countries_list,
+        index=countries_list.index('India') if 'India' in countries_list else 0)
 
     selected_year = [col for col in sector_per_country_df.columns if col.endswith(f'{selected_year}')]
     selected_year.append('Sector')
