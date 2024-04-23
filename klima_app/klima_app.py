@@ -119,7 +119,7 @@ if page == 'Gesamtübersicht':
 
     fig_globe_waterfall.update_layout(
             title = {
-                'text': "Yearly Percentage Change in Climate Finance",
+                'text': "Jährliche prozentuale Veränderung der Klimafinanzierung",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -152,7 +152,7 @@ if page == 'Länderanalyse':
     value=[2013, 2022])
 
     selected_countries = st.multiselect(
-        'Which countries would you like to view?',
+        'Welche Länder möchten Sie vergleichen?',
         countries,
         ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
     
@@ -188,8 +188,8 @@ if page == 'Länderanalyse':
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
     fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
-                title='Financing Totals for Selected Countries',
-                labels={'Amount': 'Financing Amount ($)', 'Year': 'Year'},
+                title='Finanzierungssummen für ausgewählte Lânder',
+                labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
                 category_orders={'Type': ['Other Funds','Climate Finance']},
                 color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
 
@@ -260,7 +260,7 @@ if page == 'Ländervergleich':
     value=[2013, 2022])
 
     selected_countries = st.multiselect(
-    'Which countries would you like to view?',
+    'Welche Länder möchten Sie vergleichen?',
     countries,
     ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
 
