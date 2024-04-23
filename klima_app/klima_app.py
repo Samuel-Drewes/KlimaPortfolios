@@ -43,6 +43,10 @@ country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
 
 sector_df = pd.read_csv('upload_data/sector_analysis.csv')
 
+# Sektoranalyse pro Land DF
+
+sector_per_country_df = pd.read_csv('upload_data/country_sector_analysis.csv')
+
 
 # Display Results
 
@@ -332,7 +336,7 @@ if page == 'Ländervergleich':
 if page == 'Sektoranalyse Global':
 
     selected_year = st.slider(
-    'Select Year',
+    'Jahr auswählen',
     min_value=2013,
     max_value=2022,
     value=2022
@@ -357,6 +361,36 @@ if page == 'Sektoranalyse Global':
 if page == 'Sektoranalyse pro Land':
 
     st.header('Sektoranalyse pro Land')
+
+    selected_year = st.slider(
+    'Jahr auswählen',
+    min_value=2013,
+    max_value=2022,
+    value=2022
+    )
+
+    selected_country = st.selectbox(
+    'Welches Land möchten Sie einblicken?',
+    countries,
+    'India')
+
+    selected_year = [col for col in sector_per_country_df.columns if col.endswith(f'{selected_year}')]
+    selected_year.append('Sector')
+    df_merged = sector_per_country_df[sector_per_country_df['Recipient Name'] == selected_country]
+    filtered_year_df = df_merged[selected_year]
+
+    st.write(f"{selected_year}")
+    st.write(f"{selected_country}")
+
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Climate Related Amount by Sector')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Non Climate Related Amount by Sector')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Climate Apaptation Amount by Sector')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Climate Mitigation Amount by Sector')
+
+    st.plotly_chart(clim_rel_fig)
+    st.plotly_chart(non_clim_fig)
+    st.plotly_chart(clim_adapt_fig)
+    st.plotly_chart(clim_miti_fig)
 
 if page == 'Methodik Erklärung':
 
