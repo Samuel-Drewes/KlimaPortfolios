@@ -328,7 +328,7 @@ if page == 'Sektoranalyse':
     year_select.append('Sector')
     filtered_year_df = sector_df[year_select]
 
-    st.write(f"{year_select}")
+    st.write(f"{selected_year}")
 
     clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Climate Related Amount by Sector')
     non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Non Climate Related Amount by Sector')
@@ -359,6 +359,20 @@ if page == 'Methodik Erklärung':
     - Debt forgiveness: ODA claims (I)
     - Debt rescheduling: ODA claims (I)
 
+'Administrative Costs' des BMZ sind aus der Analyse entzogen.
+             
+**Erklärung der Klimafinanzierungsberechnung:**
+
+*Bei der Berechnung der Gesamtklimafinanzierung für Projekte gibt es spezifische Regeln abhängig von den Bewertungen in den Kategorien "Climate Adaptation" und "Climate Mitigation":*
+
+Vollständige Summe: Wenn ein Projekt entweder in der Kategorie "Climate Adaptation" oder "Climate Mitigation" eine '2' aufweist, oder in beiden Kategorien jeweils eine '1', wird die gesamte Projektsumme zur Klimafinanzierung gezählt.
+Halbe Summe: Wenn nur in einer der beiden Kategorien (entweder "Climate Adaptation" oder "Climate Mitigation") der Marker '1' vorhanden ist, wird nur die halbe Summe des Projektes zur Klimafinanzierung gezählt.
+Aufteilung zwischen Mitigation und Adaptation:
+
+*Bei der spezifischen Zuordnung der Finanzmittel zu den Kategorien "Mitigation" und "Adaptation" gelten folgende Regeln:*
+
+Gesamtsumme: Erhält eine Kategorie eine '2', wird die gesamte Summe des Projektes dieser Kategorie zugewiesen.
+Halbe Summe: Wird einer Kategorie eine '1' zugeordnet, wird die Hälfte der Gesamtsumme des Projektes dieser Kategorie zugewiesen.
 """)
     
     st.header("Anrechnung Klimafinanzierung")
