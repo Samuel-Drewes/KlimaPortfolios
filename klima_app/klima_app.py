@@ -375,7 +375,7 @@ if page == 'Sektoranalyse pro Land':
         countries_list,
         index=countries_list.index('India') if 'India' in countries_list else 0)
 
-    year_select = [col for col in sector_df.columns if col.endswith(f'{selected_year}')]
+    year_select = [col for col in sector_per_country_df.columns if col.endswith(f'{selected_year}')]
     year_select.append('Sector')
     df_merged = sector_per_country_df[sector_per_country_df['Recipient Name'] == selected_country]
 
