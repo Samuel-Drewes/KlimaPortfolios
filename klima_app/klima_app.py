@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 # Overview
 
 st.title('BMZ Klima-Dashboard')
-st.header(':red[_Prototyp_ Daten noch nicht validiert]')
+st.header(':red[_Prototyp_ Daten wurden noch nicht validiert]')
 
 page = st.sidebar.selectbox('Seitenauswahl', ['Gesamtübersicht', 'Länderanalyse', 'Ländervergleich', 'Sektoranalyse Global', 'Sektoranalyse pro Land','Methodik Erklärung'])
 
