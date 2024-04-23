@@ -350,14 +350,14 @@ if page == 'Methodik Erklärung':
     Finanzierungstyp: ODA Auszahlungen (konstante Preise; in Million USD)
     Geber: Deutschland
     Geberorganisation: BMZ (nur BMZ Haushalt)
-    Finanzierungsarten:
-    - Standard Grant
-    - Standard Loan
-    - Common Equity
-    - Shares in collective investement vehicles
-    - Debt forgiveness: ODA claims (P)
-    - Debt forgiveness: ODA claims (I)
-    - Debt rescheduling: ODA claims (I)
+    Finanzierungsarten:\n
+    - Standard Grant\n
+    - Standard Loan\n
+    - Common Equity\n
+    - Shares in collective investement vehicles\n
+    - Debt forgiveness: ODA claims (P)\n
+    - Debt forgiveness: ODA claims (I)\n
+    - Debt rescheduling: ODA claims (I)\n
 
 'Administrative Costs' des BMZ sind aus der Analyse entzogen.
              
