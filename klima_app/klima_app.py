@@ -12,15 +12,7 @@ from PIL import Image
 st.title('BMZ Klima Dashboard')
 st.title(':red[_Prototype_ Data has not been validated]')
 
-# Slider
-
-from_year, to_year = st.slider(
-'Select Years',
-min_value=2013,
-max_value=2022,
-value=[2013, 2022])
-
-page = st.sidebar.selectbox('Choose your page', ['Global Data', 'Country Breakdown', 'Country Comparison', 'Sektoranalyse','Methodik Erklärung'])
+page = st.sidebar.selectbox('Choose your page', ['Gesamtübersicht', 'Länderanalyse', 'Ländervergleich', 'Sektoranalyse Global', 'Sektoranalyse pro Land','Methodik Erklärung'])
 
 
 
@@ -56,9 +48,17 @@ sector_df = pd.read_csv('upload_data/sector_analysis.csv')
 
 # Display Results
 
-if page == 'Global Data':
+if page == 'Gesamtübersicht':
 
-    st.header("Global Data Overview")
+    st.header("Gesamtübersicht")
+
+    # Slider
+
+    from_year, to_year = st.slider(
+    'Jahrauswahl',
+    min_value=2013,
+    max_value=2022,
+    value=[2013, 2022])
 
     # Text %
 
@@ -141,9 +141,17 @@ if page == 'Global Data':
     st.dataframe(full_globe_df)
 
 
-if page == 'Country Breakdown':
+if page == 'Länderanalyse':
 
-    st.header('Country Breakdown')
+    st.header('Länderanalyse')
+
+    # Slider
+
+    from_year, to_year = st.slider(
+    'Jahrauswahl',
+    min_value=2013,
+    max_value=2022,
+    value=[2013, 2022])
 
     selected_countries = st.multiselect(
         'Which countries would you like to view?',
@@ -241,9 +249,17 @@ if page == 'Country Breakdown':
     st.plotly_chart(fig_sel_waterfall)
     st.dataframe(all_country_df)
 
-if page == 'Country Comparison':
+if page == 'Ländervergleich':
 
-    st.header('Country Comparison')
+    st.header('Ländervergleich')
+
+    # Slider
+
+    from_year, to_year = st.slider(
+    'Jahrauswahl',
+    min_value=2013,
+    max_value=2022,
+    value=[2013, 2022])
 
     selected_countries = st.multiselect(
     'Which countries would you like to view?',
@@ -315,7 +331,7 @@ if page == 'Country Comparison':
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
 
-if page == 'Sektoranalyse':
+if page == 'Sektoranalyse Global':
 
     selected_year = st.slider(
     'Select Year',
@@ -339,6 +355,10 @@ if page == 'Sektoranalyse':
     st.plotly_chart(non_clim_fig)
     st.plotly_chart(clim_adapt_fig)
     st.plotly_chart(clim_miti_fig)
+
+if page == 'Sektoranalyse pro Land':
+
+    st.header('Sektoranalyse pro Land')
 
 if page == 'Methodik Erklärung':
 
@@ -375,9 +395,5 @@ Gesamtsumme: Erhält eine Kategorie eine '2', wird die gesamte Summe des Projekt
 Halbe Summe: Wird einer Kategorie eine '1' zugeordnet, wird die Hälfte der Gesamtsumme des Projektes dieser Kategorie zugewiesen.
 """)
     
-    st.header("Anrechnung Klimafinanzierung")
 
-    image = Image.open('../../../upload_data/methodiktable')
-
-    st.image(image, caption='Enter any caption here')
 
