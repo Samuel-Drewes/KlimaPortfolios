@@ -129,7 +129,7 @@ if page == 'Gesamtübersicht':
                 'xanchor': 'center',
                 'yanchor': 'top'},
             xaxis = {"type":"category"},
-            yaxis = {"title":"Percentage"},
+            yaxis = {"title":"Prozent"},
     )
 
     st.plotly_chart(fig_globe_waterfall)
@@ -350,8 +350,8 @@ if page == 'Sektoranalyse Global':
 
     clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
     non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaanpassung Finanzierung Sektoraufteilung")
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Klimaanpassung Finanzierung Sektoraufteilung")
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
 
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
@@ -391,8 +391,8 @@ if page == 'Sektoranalyse pro Land':
 
     clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
     non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Klimaschutzfinanzierung Sektoraufteilung')
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Klimaanpassung Finanzierung Sektoraufteilung')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Klimaanpassung Finanzierung Sektoraufteilung')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Klimaschutzfinanzierung Sektoraufteilung')
 
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
