@@ -123,7 +123,7 @@ if page == 'Gesamtübersicht':
 
     fig_globe_waterfall.update_layout(
             title = {
-                'text': "Jährliche prozentuale Veränderung der Klimafinanzierung",
+                'text': "Jährliche Veränderung der Klimafinanzierung (%)",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -156,7 +156,7 @@ if page == 'Länderanalyse':
     value=[2013, 2022])
 
     selected_countries = st.multiselect(
-        'Welche Länder möchten Sie vergleichen?',
+        'Welche Länder möchten Sie summieren?',
         countries,
         ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
     
@@ -187,15 +187,15 @@ if page == 'Länderanalyse':
                                 var_name='Type_Year', value_name='Amount')
 
     melted_df['Year'] = melted_df['Type_Year'].apply(lambda x: x.split('_')[-1])
-    melted_df['Type'] = melted_df['Type_Year'].apply(lambda x: 'Climate Finance' if 'clim_rel_amount' in x else 'Other Funds')
+    melted_df['Type'] = melted_df['Type_Year'].apply(lambda x: 'Klimafinanzierung' if 'clim_rel_amount' in x else 'Andere ODA')
 
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
     fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
-                title='Finanzierungssummen für ausgewählte Lânder',
+                title='Finanzierungssummen für ausgewählte Länder',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-                category_orders={'Type': ['Other Funds','Climate Finance']},
-                color_discrete_map={'Other Funds': 'orange', 'Climate Finance': 'green'})# This ensures consistent color ordering
+                category_orders={'Type': ['Andere ODA','Klimafinanzierung']},
+                color_discrete_map={'Andere ODA': 'orange', 'Klimafinanzierung': 'green'})# This ensures consistent color ordering
 
     fig_sel_bar.update_layout(title_x=0.5)
 
@@ -239,13 +239,13 @@ if page == 'Länderanalyse':
 
     fig_sel_waterfall.update_layout(
             title = {
-                'text': "Yearly Percentage Change in Climate Finance for Selected Countries",
+                'text': "Jährliche Veränderung der Klimafinanzierung (%) für ausgewählte Länder",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
                 'yanchor': 'top'},
             xaxis = {"type":"category"},
-            yaxis = {"title":"Percentage"},
+            yaxis = {"title":"Prozent"},
     )
 
     st.plotly_chart(fig_sel_waterfall)
@@ -278,8 +278,8 @@ if page == 'Ländervergleich':
                 x='Year', 
                 y='Value', 
                 color='Recipient Name',
-                title='Value by Year for Selected Country',
-                labels={'Value': 'Climate Relevant Financing (%)', 'Year': 'Year'},
+                title='Klimafinanzierung in ausgewählten Ländern',
+                labels={'Value': 'Klimarelevante Finanzierung (%)', 'Year': 'Jahr'},
                 markers=True)
 
     st.plotly_chart(fig_country_compare)
@@ -302,7 +302,7 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Ranking of Selected Countries for Time Period")
+    st.subheader("Ranking für ausgewählte Länder im ausgewählten Zeitraum")
     st.dataframe(ranked_df)
 
     # Top 10 Bottom 10 Ranking
@@ -328,7 +328,7 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Top and Bottom 10 Countries for all Countries in selected Time Period")
+    st.subheader("Top und Bottom 10 Länder für alle Länder im ausgewählten Zeitraum")
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
@@ -348,10 +348,10 @@ if page == 'Sektoranalyse Global':
 
     st.write(f"{selected_year}")
 
-    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Climate Related Amount by Sector')
-    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Non Climate Related Amount by Sector')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Climate Apaptation Amount by Sector')
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Climate Mitigation Amount by Sector')
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaanpassung Finanzierung Sektoraufteilung")
 
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
@@ -389,10 +389,10 @@ if page == 'Sektoranalyse pro Land':
     st.write(f"{selected_year}")
     st.write(f"{selected_country}")
 
-    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Climate Related Amount by Sector')
-    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Non Climate Related Amount by Sector')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Climate Apaptation Amount by Sector')
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Climate Mitigation Amount by Sector')
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Klimaschutzfinanzierung Sektoraufteilung')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Klimaanpassung Finanzierung Sektoraufteilung')
 
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
