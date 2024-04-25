@@ -8,7 +8,7 @@ st.markdown("""
 <style>
 .intermediate-font {
     font-size:16px;  /* Example size, adjust as needed */
-    font-weight: bold; /* Makes the text bold */
+    font-weight: 1000; /* Adjust the weight to mimic subheader, if desired */
 }
 </style>
 """, unsafe_allow_html=True)
