@@ -80,7 +80,7 @@ if page == 'Gesamtübersicht':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.markdown(f'<p class=Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%</p>', unsafe_allow_html=True)
+    st.markdown(f"<p class=Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%</p>", unsafe_allow_html=True)
 
     # st.markdown(f"Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%")
 
