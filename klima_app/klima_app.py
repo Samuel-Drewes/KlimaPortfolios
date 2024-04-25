@@ -391,18 +391,18 @@ if page == 'Sektoranalyse Global':
     figu1 , figu2 = st.columns(2)
 
     with figu1:
-        st.plotly_chart(clim_rel_fig)
-    
+        st.plotly_chart(clim_rel_fig, use_container_width=True)
+        
     with figu2:
-        st.plotly_chart(non_clim_fig)
+        st.plotly_chart(non_clim_fig, use_container_width=True)
 
     figu3 , figu4 = st.columns(2)
 
     with figu3:
-        st.plotly_chart(clim_adapt_fig)
-    
+        st.plotly_chart(clim_adapt_fig, use_container_width=True)
+        
     with figu4:
-        st.plotly_chart(clim_miti_fig)
+        st.plotly_chart(clim_miti_fig, use_container_width=True)
 
 
 
