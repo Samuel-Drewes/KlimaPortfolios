@@ -363,6 +363,19 @@ if page == 'Ländervergleich':
 
     st.markdown('<p class="intermediate-font">Top und Bottom 10 Länder im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
 
+    figu1 , figu2 = st.columns(2)
+
+    with figu1:
+            st.markdown('<p class="intermediate-font">Top 10 Länder</p>', unsafe_allow_html=True)
+
+            st.dataframe(ranked_df.dropna().head(10), use_container_width = True)
+
+        
+    with figu2:
+        st.markdown('<p class="intermediate-font">Bottom 10 Länder</p>', unsafe_allow_html=True)
+
+        st.dataframe(ranked_df.dropna().tail(10),use_container_width = True)
+
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
