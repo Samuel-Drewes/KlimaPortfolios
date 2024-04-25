@@ -381,18 +381,20 @@ if page == 'Sektoranalyse Global':
     figu1 , figu2 = st.columns(2)
 
     with figu1:
-        # st.subheader('Status Info Distribution')
         st.plotly_chart(clim_rel_fig)
     
-
     with figu2:
-        # st.subheader('Blood Type Distribution by Gender')
-        st.plotly_chart(non_clim_fig)   
+        st.plotly_chart(non_clim_fig)
 
-    st.plotly_chart(clim_rel_fig)
-    st.plotly_chart(non_clim_fig)
-    st.plotly_chart(clim_adapt_fig)
-    st.plotly_chart(clim_miti_fig)
+    figu3 , figu4 = st.columns(2)
+
+    with figu3:
+        st.plotly_chart(clim_adapt_fig)
+    
+    with figu4:
+        st.plotly_chart(clim_miti_fig)
+
+
 
 if page == 'Sektoranalyse pro Land':
 
