@@ -361,7 +361,8 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.markdown("Top und Bottom 10 Länder für alle Länder im ausgewählten Zeitraum")
+    st.markdown('<p class="intermediate-font">Top und Bottom 10 Länder im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
+
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
