@@ -381,8 +381,8 @@ if page == 'Sektoranalyse Global':
     figu1 , figu2 = st.columns(2)
 
     with figu1:
-    st.subheader('Status Info Distribution')
-    st.plotly_chart(clim_rel_fig)
+        st.subheader('Status Info Distribution')
+        st.plotly_chart(clim_rel_fig)
     
 
     with figu2:
