@@ -325,7 +325,7 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung im Zeitraum'})\
             .sort_values('Prozentuale Veränderung im Zeitraum', ascending = False)
 
-    st.subheader("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
+    st.caption("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
     st.dataframe(ranked_df)
 
     # Top 10 Bottom 10 Ranking
