@@ -369,12 +369,10 @@ if page == 'Sektoranalyse Global':
     year_select.append('Sector')
     filtered_year_df = sector_df[year_select]
 
-    st.write(f"{selected_year}")
-
-    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
-    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Klimaanpassung Finanzierung Sektoraufteilung")
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Sektoraufteilung klimarelevante Finanzierung')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Sektoraufteilung nicht-klimarelevante Finanzierung')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Sektoraufteilung Klimaanpassungsfinanzierung")
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Sektoraufteilung Klimaschutzfinanzierung")
 
 
     # Customize margins to reduce unnecessary space
@@ -429,23 +427,37 @@ if page == 'Sektoranalyse pro Land':
 
     filtered_year_df = df_merged[year_select]
 
-    # selected_year = [col for col in sector_per_country_df.columns if col.endswith(f'{selected_year}')]
-    # selected_year.append('Sector')
-    # df_merged = sector_per_country_df[sector_per_country_df['Recipient Name'] == selected_country]
-    # filtered_year_df = df_merged[selected_year]
 
-    st.write(f"{selected_year}")
-    st.write(f"{selected_country}")
+    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Sektoraufteilung klimarelevante Finanzierung')
+    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Sektoraufteilung nicht-klimarelevante Finanzierung')
+    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Sektoraufteilung Klimaanpassungsfinanzierung')
+    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Sektoraufteilung Klimaschutzfinanzierung')
 
-    clim_rel_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_rel_amount_{selected_year}', title='Klimarelevante Finanzierung Sektoraufteilung')
-    non_clim_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'non_clim_{selected_year}', title='Nicht-Klimarelevante Finanzierung Sektoraufteilung')
-    clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title='Klimaanpassung Finanzierung Sektoraufteilung')
-    clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title='Klimaschutzfinanzierung Sektoraufteilung')
+    # Customize margins to reduce unnecessary space
+    layout_update = {
+        'margin': dict(t=30, l=0, r=0, b=0)  # Adjust top, left, right, bottom margins as needed
+    }
 
-    st.plotly_chart(clim_rel_fig)
-    st.plotly_chart(non_clim_fig)
-    st.plotly_chart(clim_adapt_fig)
-    st.plotly_chart(clim_miti_fig)
+    clim_rel_fig.update_layout(**layout_update)
+    non_clim_fig.update_layout(**layout_update)
+    clim_adapt_fig.update_layout(**layout_update)
+    clim_miti_fig.update_layout(**layout_update)
+
+    figu1 , figu2 = st.columns(2)
+
+    with figu1:
+        st.plotly_chart(clim_rel_fig, use_container_width=True)
+        
+    with figu2:
+        st.plotly_chart(non_clim_fig, use_container_width=True)
+
+    figu3 , figu4 = st.columns(2)
+
+    with figu3:
+        st.plotly_chart(clim_adapt_fig, use_container_width=True)
+        
+    with figu4:
+        st.plotly_chart(clim_miti_fig, use_container_width=True)
 
 if page == 'Methodik Erklärung':
 
