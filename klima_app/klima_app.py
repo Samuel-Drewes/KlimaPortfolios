@@ -358,21 +358,21 @@ if page == 'Ländervergleich':
 
     values_countries.index = index_countries
 
-    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
-            .sort_values('% Change in Period', ascending = False)
+    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum'})\
+            .sort_values('Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum', ascending = False)
 
-    st.markdown('<p class="intermediate-font">Top und Bottom 10 Länder im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
+    st.markdown('<p class="intermediate-font">Länder mit größtem Zuwachs bzw. Rückgang an Klimafinanzierungsantiel im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
 
     figu1 , figu2 = st.columns(2)
 
     with figu1:
-            st.markdown('<p class="intermediate-font">Länder mit dem größten prozentualen Zuwachs an Klimafinanzierung im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
+            st.markdown('<p class="intermediate-font">Länder mit dem größten prozentualen Zuwachs</p>', unsafe_allow_html=True)
 
             st.dataframe(ranked_df.dropna().head(10), use_container_width = True)
 
         
     with figu2:
-        st.markdown('<p class="intermediate-font">Länder mit größten prozentualen Rückgang an Klimafinanzierung im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
+        st.markdown('<p class="intermediate-font">Länder mit größten prozentualen Rückgang</p>', unsafe_allow_html=True)
 
         st.dataframe(ranked_df.dropna().tail(10),use_container_width = True)
 
