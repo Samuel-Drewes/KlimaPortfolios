@@ -80,9 +80,7 @@ if page == 'Gesamtübersicht':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.markdown(f"<p class=Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%</p>", unsafe_allow_html=True)
-
-    # st.markdown(f"Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%")
+    st.markdown('<p class="intermediate-font">Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%</p>', unsafe_allow_html=True)
 
 
     # Globe Stacked 
@@ -360,8 +358,8 @@ if page == 'Ländervergleich':
 
     values_countries.index = index_countries
 
-    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum'})\
-            .sort_values('Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum', ascending = False)
+    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung'})\
+            .sort_values('Prozentuale Veränderung', ascending = False)
 
     st.markdown('<p class="intermediate-font">Länder mit größtem Zuwachs bzw. Rückgang an Klimafinanzierungsantiel im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
 
