@@ -80,7 +80,7 @@ if page == 'Gesamtübersicht':
 
     change_perc = round(to_val-from_val, 3)
 
-    st.subheader(f"Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%")
+    st.markdown(f"Die globale prozentuale Änderung der Klimafinanzierung zwischen {from_year} und {to_year} betrug {change_perc}%")
 
 
     # Globe Stacked 
@@ -334,7 +334,6 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung im Zeitraum'})\
             .sort_values('Prozentuale Veränderung im Zeitraum', ascending = False)
 
-    st.caption("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
     st.markdown('<p class="intermediate-font">Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
 
     st.dataframe(ranked_df)
@@ -362,7 +361,7 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Top und Bottom 10 Länder für alle Länder im ausgewählten Zeitraum")
+    st.markdown("Top und Bottom 10 Länder für alle Länder im ausgewählten Zeitraum")
 
     st.dataframe(ranked_df.dropna().head(10))
     st.dataframe(ranked_df.dropna().tail(10))
