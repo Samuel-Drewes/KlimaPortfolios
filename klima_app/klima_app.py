@@ -123,7 +123,7 @@ if page == 'Gesamtübersicht':
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
             )
 
-        fig_split_percent.update_layout(title_x=0.5)
+        # fig_split_percent.update_layout(title_x=0.5)
 
         st.plotly_chart(fig_split_percent)
 
