@@ -91,8 +91,8 @@ if page == 'Gesamtübersicht':
     # Globe Split
 
     chart_type = st.radio(
-    "Wählen Sie einen Grafiktyp",
-    ["Absolute Werte", "Prozentual"],
+    "Wählen Sie eine Visualisierungsart",
+    ["Absolute Werte", "Anteilig"],
     )
 
     split_df = split_df[split_df['Year'].between(from_year,to_year)]
@@ -111,13 +111,13 @@ if page == 'Gesamtübersicht':
 
         st.plotly_chart(fig_split)
 
-    if chart_type == "Prozentual":
+    if chart_type == "Anteilig":
 
         total_per_year = split_df.groupby('Year')['Amount'].transform('sum')
         split_df['Percentage'] = (split_df['Amount'] / total_per_year) * 100
 
         fig_split_percent = px.bar(split_df, x='Year', y='Percentage', color='Finanzierungstyp',
-            title='Globale Finanzierungssummen (Prozentual)',
+            title='Anteil Klimaschutz und Klimaanpassung an ODA-Auszahlungen',
             labels={'Percentage': 'Prozentsatz der Finanzierung', 'Year': 'Jahr'},
             category_orders={'Finanzierungstyp': ['Andere ODA', 'Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
