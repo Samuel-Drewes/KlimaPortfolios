@@ -377,6 +377,16 @@ if page == 'Sektoranalyse Global':
     clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
 
 
+    # Customize margins to reduce unnecessary space
+    layout_update = {
+        'margin': dict(t=30, l=0, r=0, b=0)  # Adjust top, left, right, bottom margins as needed
+    }
+
+    clim_rel_fig.update_layout(**layout_update)
+    non_clim_fig.update_layout(**layout_update)
+    clim_adapt_fig.update_layout(**layout_update)
+    clim_miti_fig.update_layout(**layout_update)
+
 
     figu1 , figu2 = st.columns(2)
 
