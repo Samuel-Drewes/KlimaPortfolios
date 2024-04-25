@@ -301,8 +301,8 @@ if page == 'Ländervergleich':
                 x='Year', 
                 y='Value', 
                 color='Recipient Name',
-                title='Klimafinanzierung in ausgewählten Ländern',
-                labels={'Value': 'Klimarelevante Finanzierung (%)', 'Year': 'Jahr'},
+                title='Anteil der Klimafinanzierung am gesamten Portfolio in ausgewählten Ländern',
+                labels={'Value': 'Anteil der klimarelevanten Finanzierung (%)', 'Year': 'Jahr'},
                 markers=True)
 
     st.plotly_chart(fig_country_compare)
@@ -325,7 +325,7 @@ if page == 'Ländervergleich':
     ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
             .sort_values('% Change in Period', ascending = False)
 
-    st.subheader("Ranking für ausgewählte Länder im ausgewählten Zeitraum")
+    st.subheader("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
     st.dataframe(ranked_df)
 
     # Top 10 Bottom 10 Ranking
