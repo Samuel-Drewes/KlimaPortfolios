@@ -4,6 +4,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
+st.markdown("""
+<style>
+.intermediate-font {
+    font-size:16px;  /* Example size, adjust as needed */
+    font-weight: 500; /* Adjust the weight to mimic subheader, if desired */
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 # Overview
 
@@ -326,6 +335,8 @@ if page == 'Ländervergleich':
             .sort_values('Prozentuale Veränderung im Zeitraum', ascending = False)
 
     st.caption("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
+    st.markdown('<p class="intermediate-font">Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum</p>', unsafe_allow_html=True)
+
     st.dataframe(ranked_df)
 
     # Top 10 Bottom 10 Ranking
