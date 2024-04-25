@@ -190,7 +190,7 @@ if page == 'Länderanalyse':
     selected_countries = st.multiselect(
         'Welche Länder möchten Sie summieren?',
         countries,
-        ['India', 'Brazil', 'Namibia', 'Ukraine', 'Tunisia', 'Mexico'])
+        ['India'])
     
 
     #Filter by country
