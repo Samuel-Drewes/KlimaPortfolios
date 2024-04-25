@@ -322,8 +322,8 @@ if page == 'Ländervergleich':
     values_countries = (to_values - from_values)*100
     values_countries.index = index_countries
 
-    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': '% Change in Period'})\
-            .sort_values('% Change in Period', ascending = False)
+    ranked_df = pd.DataFrame(values_countries).rename(columns={'Value': 'Prozentuale Veränderung im Zeitraum'})\
+            .sort_values('Prozentuale Veränderung im Zeitraum', ascending = False)
 
     st.subheader("Prozentuale Veränderung der Klimafinanzierung im ausgewählten Zeitraum")
     st.dataframe(ranked_df)
