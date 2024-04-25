@@ -381,12 +381,12 @@ if page == 'Sektoranalyse Global':
     figu1 , figu2 = st.columns(2)
 
     with figu1:
-        st.subheader('Status Info Distribution')
+        # st.subheader('Status Info Distribution')
         st.plotly_chart(clim_rel_fig)
     
 
     with figu2:
-        st.subheader('Blood Type Distribution by Gender')
+        # st.subheader('Blood Type Distribution by Gender')
         st.plotly_chart(non_clim_fig)   
 
     st.plotly_chart(clim_rel_fig)
