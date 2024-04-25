@@ -90,19 +90,42 @@ if page == 'Gesamtübersicht':
 
     # Globe Split
 
+    chart_type = st.radio(
+    "Wählen Sie einen Grafiktyp",
+    ["Absolute Werte", "Prozentual"],
+    )
+
     split_df = split_df[split_df['Year'].between(from_year,to_year)]
 
-    fig_split = px.bar(split_df, x='Year', y='Amount', color='Finanzierungstyp',
-            title='Globale Finanzierungssummen',
-            labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-            category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+    if chart_type == "Absolute Werte":
+
+
+        fig_split = px.bar(split_df, x='Year', y='Amount', color='Finanzierungstyp',
+                title='Globale Finanzierungssummen',
+                labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
+                category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+                color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
+                )
+
+        fig_split.update_layout(title_x=0.5)
+
+        st.plotly_chart(fig_split)
+
+    if chart_type == "Prozentual":
+
+        total_per_year = split_df.groupby('Year')['Amount'].transform('sum')
+        split_df['Percentage'] = (split_df['Amount'] / total_per_year) * 100
+
+        fig_split_percent = px.bar(split_df, x='Year', y='Percentage', color='Finanzierungstyp',
+            title='Globale Finanzierungssummen (Prozentual)',
+            labels={'Percentage': 'Prozentsatz der Finanzierung', 'Year': 'Jahr'},
+            category_orders={'Finanzierungstyp': ['Andere ODA', 'Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
-            )# This ensures consistent color ordering
+            )
 
-    fig_split.update_layout(title_x=0.5)
+        fig_split_percent.update_layout(title_x=0.5)
 
-    st.plotly_chart(fig_split)
-
+        st.plotly_chart(fig_split_percent)
 
 
     # Design Fig Globe Waterfall
