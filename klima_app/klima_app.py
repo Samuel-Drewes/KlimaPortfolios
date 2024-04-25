@@ -376,6 +376,19 @@ if page == 'Sektoranalyse Global':
     clim_adapt_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_adapt_amount_{selected_year}', title="Klimaanpassung Finanzierung Sektoraufteilung")
     clim_miti_fig = px.sunburst(filtered_year_df, path=['Sector'], values=f'clim_miti_amount_{selected_year}', title="Klimaschutzfinanzierung Sektoraufteilung")
 
+
+
+    figu1 , figu2 = st.columns(2)
+
+    with figu1:
+    st.subheader('Status Info Distribution')
+    st.plotly_chart(clim_rel_fig)
+    
+
+    with figu2:
+        st.subheader('Blood Type Distribution by Gender')
+        st.plotly_chart(non_clim_fig)   
+
     st.plotly_chart(clim_rel_fig)
     st.plotly_chart(non_clim_fig)
     st.plotly_chart(clim_adapt_fig)
