@@ -78,10 +78,10 @@ if page == 'Gesamtübersicht':
     
     globe_df = globe_df[globe_df['Year'].between(from_year,to_year)]
 
-    fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Type',
+    fig_globe_bar = px.bar(globe_df, x='Year', y='Amount', color='Finanzierungstyp',
                 title='Globale Finanzierungssummen',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-                category_orders={'Type': ['Andere ODA','Klimafinanzierung']},
+                category_orders={'Finanzierungstyp': ['Andere ODA','Klimafinanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimafinanzierung': 'green'})# This ensures consistent color ordering
 
     fig_globe_bar.update_layout(title_x=0.5)
@@ -92,10 +92,10 @@ if page == 'Gesamtübersicht':
 
     split_df = split_df[split_df['Year'].between(from_year,to_year)]
 
-    fig_split = px.bar(split_df, x='Year', y='Amount', color='Type',
+    fig_split = px.bar(split_df, x='Year', y='Amount', color='Finanzierungstyp',
             title='Globale Finanzierungssummen',
             labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-            category_orders={'Type': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+            category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
             )# This ensures consistent color ordering
 
