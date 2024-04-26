@@ -94,6 +94,14 @@ if page == 'Gesamtübersicht':
 
     fig_globe_bar.update_layout(title_x=0.5)
 
+    tick_values = [2e9, 4e9, 6e9, 8e9, 10e9, 12e9]
+    tick_labels = ['2 M', '4 M', '6 M', '8 M', '10 M', '12 M']
+
+    # Update the y-axis to display values in billions ('M' for Milliarden)
+    fig_globe_bar.update_yaxes(tickprefix="", ticksuffix="",
+                    tickvals=tick_values,
+                    ticktext=tick_labels)
+
     st.plotly_chart(fig_globe_bar)
 
     # Globe Split
