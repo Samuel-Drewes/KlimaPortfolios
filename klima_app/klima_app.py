@@ -52,7 +52,7 @@ all_country_split_df = pd.read_csv('upload_data/all_country_split.csv')
 
 # Get all country download df
 
-all_country_df_download = pd.read_csv("../upload_data/all_country_df_download.csv")
+all_country_df_download = pd.read_csv("upload_data/all_country_df_download.csv")
 
 
 # Country compare DF
