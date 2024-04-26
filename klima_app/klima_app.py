@@ -50,6 +50,11 @@ countries = all_country_df['Recipient Name'].unique()
 
 all_country_split_df = pd.read_csv('upload_data/all_country_split.csv')
 
+# Get all country download df
+
+all_country_df_download = pd.read_csv("../upload_data/all_country_df_download.csv")
+
+
 # Country compare DF
 
 country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
@@ -342,7 +347,10 @@ if page == 'Länderanalyse':
 
     st.markdown(f'<p class="intermediate-font">Daten zum Download:</p>', unsafe_allow_html=True)
 
-    st.dataframe(all_country_df)
+    all_country_df_download = all_country_df_download[all_country_df_download['Recipient Name'].isin(selected_countries)]
+    all_country_df_download = all_country_df_download[all_country_df_download['Year'].between(from_year,to_year)]
+
+    st.dataframe(all_country_df_download)
 
 if page == 'Ländervergleich':
 
