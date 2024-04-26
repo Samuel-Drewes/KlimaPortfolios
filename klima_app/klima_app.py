@@ -46,6 +46,10 @@ full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 all_country_df = pd.read_csv("upload_data/all_country_df.csv")
 countries = all_country_df['Recipient Name'].unique()
 
+# Get all country split df
+
+all_country_split_df = pd.read_csv('upload_data/all_country_split.csv')
+
 # Country compare DF
 
 country_compare_df = pd.read_csv('upload_data/country_specific_df.csv')
@@ -245,6 +249,48 @@ if page == 'Länderanalyse':
 
 
     st.plotly_chart(fig_sel_bar)
+
+    # All country Split
+
+    chart_type = st.radio(
+    "Wählen Sie eine Visualisierungsart",
+    ["Absolute Werte", "Anteilig"],
+    )
+
+    #Filter by country & Year
+    all_country_split_df = all_country_split_df[all_country_split_df['Recipient Name'].isin(selected_countries)]
+    all_country_split_df = all_country_split_df[all_country_split_df['Year'].between(from_year,to_year)]
+
+    if chart_type == "Absolute Werte":
+
+
+        fig_all_split = px.bar(all_country_split_df, x='Year', y='Amount', color='Finanzierungstyp',
+                title='Globale Finanzierungssummen',
+                labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
+                category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+                color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
+                )
+
+        fig_all_split.update_layout(title_x=0.5)
+
+
+        st.plotly_chart(fig_all_split)
+
+    if chart_type == "Anteilig":
+
+        total_per_year = all_country_split_df.groupby('Year')['Amount'].transform('sum')
+        all_country_split_df['Percentage'] = (all_country_split_df['Amount'] / total_per_year) * 100
+
+        fig_all_split_percent = px.bar(all_country_split_df, x='Year', y='Percentage', color='Finanzierungstyp',
+            title='Anteil Klimaschutz und Klimaanpassung an ODA-Auszahlungen',
+            labels={'Percentage': 'Prozentsatz der Finanzierung', 'Year': 'Jahr'},
+            category_orders={'Finanzierungstyp': ['Andere ODA', 'Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
+            color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
+            )
+
+        # fig_all_split_percent.update_layout(title_x=0.5)
+
+        st.plotly_chart(fig_all_split_percent)
 
 
     # Create Waterfall
