@@ -186,6 +186,9 @@ if page == 'Gesamtübersicht':
 
     # DF to show
 
+    st.markdown(f'<p class="intermediate-font">Daten zum Download:</p>', unsafe_allow_html=True)
+
+
     full_globe_df = full_globe_df[full_globe_df['Jahr'].between(from_year,to_year)]
 
     st.dataframe(full_globe_df)
