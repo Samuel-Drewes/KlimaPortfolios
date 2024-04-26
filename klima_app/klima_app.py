@@ -265,13 +265,11 @@ if page == 'Länderanalyse':
 
 
         fig_all_split = px.bar(all_country_split_df, x='Year', y='Amount', color='Finanzierungstyp',
-                title='Globale Finanzierungssummen',
+                title='Finanzierungssummen ausgewählte Länder',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
                 category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
                 )
-
-        fig_all_split.update_layout(title_x=0.5)
 
 
         st.plotly_chart(fig_all_split)
@@ -288,7 +286,6 @@ if page == 'Länderanalyse':
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
             )
 
-        # fig_all_split_percent.update_layout(title_x=0.5)
 
         st.plotly_chart(fig_all_split_percent)
 
