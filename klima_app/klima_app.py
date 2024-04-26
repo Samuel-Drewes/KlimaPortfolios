@@ -173,15 +173,15 @@ if page == 'Gesamtübersicht':
             )
 
         fig_split_percent.update_layout(
-            title_x=0.35,
+            title_x=0.15,
             # Adjust margins to ensure plot utilizes more space and nothing is cut off
             margin=dict(l=20, r=20, t=50, b=20),
             # Adjust the legend's position if necessary
             legend=dict(
                 x=0,  # Legend x position to the left
                 xanchor='left',  # Anchor to the left side
-                y=1,  # Top of the plot
-                yanchor='top'  # Anchor to the top
+                y=0,  # Top of the plot
+                yanchor='bottom'  # Anchor to the top
             ))
 
         st.plotly_chart(fig_split_percent)
