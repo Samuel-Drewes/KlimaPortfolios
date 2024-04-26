@@ -235,14 +235,14 @@ if page == 'Länderanalyse':
                                 var_name='Type_Year', value_name='Amount')
 
     melted_df['Year'] = melted_df['Type_Year'].apply(lambda x: x.split('_')[-1])
-    melted_df['Type'] = melted_df['Type_Year'].apply(lambda x: 'Klimafinanzierung' if 'clim_rel_amount' in x else 'Andere ODA')
+    melted_df['Finanzierungstyp'] = melted_df['Type_Year'].apply(lambda x: 'Klimafinanzierung' if 'clim_rel_amount' in x else 'Andere ODA')
 
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
-    fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Type',
+    fig_sel_bar = px.bar(melted_df, x='Year', y='Amount', color='Finanzierungstyp',
                 title='Finanzierungssummen für ausgewählte Länder',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
-                category_orders={'Type': ['Andere ODA','Klimafinanzierung']},
+                category_orders={'Finanzierungstyp': ['Andere ODA','Klimafinanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimafinanzierung': 'green'})# This ensures consistent color ordering
 
     fig_sel_bar.update_layout(title_x=0.5)
@@ -433,6 +433,9 @@ if page == 'Ländervergleich':
 
 
 if page == 'Sektoranalyse Global':
+
+    st.header('Sektoranalyse Global')
+
 
     selected_year = st.slider(
     'Jahr auswählen',
