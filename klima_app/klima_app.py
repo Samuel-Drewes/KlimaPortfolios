@@ -110,8 +110,8 @@ if page == 'Gesamtübersicht':
         margin=dict(l=20, r=20, t=50, b=20),
         # Adjust the legend's position if necessary
         legend=dict(
-            x=1,  # Legend x position
-            xanchor='right',  # Anchor to the right side
+            x=0,  # Legend x position to the left
+            xanchor='left',  # Anchor to the left side
             y=1,  # Top of the plot
             yanchor='top'  # Anchor to the top
         )
