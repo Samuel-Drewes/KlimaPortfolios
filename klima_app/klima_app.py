@@ -104,14 +104,21 @@ if page == 'Gesamtübersicht':
                 category_orders={'Finanzierungstyp': ['Andere ODA','Klimafinanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimafinanzierung': 'green'})# This ensures consistent color ordering
 
-    fig_globe_bar.update_layout(title_x=0.5)
+    fig_globe_bar.update_layout(
+        title_x=0.5,
+        # Adjust margins to ensure plot utilizes more space and nothing is cut off
+        margin=dict(l=20, r=20, t=50, b=20),
+        # Adjust the legend's position if necessary
+        legend=dict(
+            x=1,  # Legend x position
+            xanchor='right',  # Anchor to the right side
+            y=1,  # Top of the plot
+            yanchor='top'  # Anchor to the top
+        )
+    )
 
-    # Update the y-axis to display values in billions ('M' for Milliarden)
-    fig_globe_bar.update_yaxes(tickprefix="", ticksuffix="",
-                    tickvals=tick_values,
-                    ticktext=tick_labels)
-
-    st.plotly_chart(fig_globe_bar)
+    # Display the plot and allow it to use full container width
+    st.plotly_chart(fig_globe_bar, use_container_width=True)
 
     # Globe Split
 
