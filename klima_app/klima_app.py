@@ -172,7 +172,7 @@ if page == 'Gesamtübersicht':
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
             )
 
-        fig_split.update_layout(
+        fig_split_percent.update_layout(
             title_x=0.35,
             # Adjust margins to ensure plot utilizes more space and nothing is cut off
             margin=dict(l=20, r=20, t=50, b=20),
