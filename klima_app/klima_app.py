@@ -347,8 +347,7 @@ if page == 'Länderanalyse':
 
     st.markdown(f'<p class="intermediate-font">Daten zum Download:</p>', unsafe_allow_html=True)
 
-    all_country_df_download = all_country_df_download[all_country_df_download['Recipient Name'].isin(selected_countries)]
-    all_country_df_download = all_country_df_download[all_country_df_download['Year'].between(from_year,to_year)]
+    all_country_df_download = all_country_df_download[all_country_df_download['Empfängerland'].isin(selected_countries)]
 
     st.dataframe(all_country_df_download)
 
