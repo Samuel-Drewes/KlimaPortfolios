@@ -146,6 +146,18 @@ if page == 'Gesamtübersicht':
                     tickvals=tick_values,
                     ticktext=tick_labels)
 
+        fig_split.update_layout(
+            title_x=0.35,
+            # Adjust margins to ensure plot utilizes more space and nothing is cut off
+            margin=dict(l=20, r=20, t=50, b=20),
+            # Adjust the legend's position if necessary
+            legend=dict(
+                x=0,  # Legend x position to the left
+                xanchor='left',  # Anchor to the left side
+                y=1,  # Top of the plot
+                yanchor='top'  # Anchor to the top
+            ))
+
         st.plotly_chart(fig_split)
 
     if chart_type == "Anteilig":
@@ -160,7 +172,17 @@ if page == 'Gesamtübersicht':
             color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
             )
 
-        # fig_split_percent.update_layout(title_x=0.5)
+        fig_split.update_layout(
+            title_x=0.35,
+            # Adjust margins to ensure plot utilizes more space and nothing is cut off
+            margin=dict(l=20, r=20, t=50, b=20),
+            # Adjust the legend's position if necessary
+            legend=dict(
+                x=0,  # Legend x position to the left
+                xanchor='left',  # Anchor to the left side
+                y=1,  # Top of the plot
+                yanchor='top'  # Anchor to the top
+            ))
 
         st.plotly_chart(fig_split_percent)
 
