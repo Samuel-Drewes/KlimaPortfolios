@@ -44,7 +44,7 @@ full_globe_df = pd.read_csv('upload_data/globe_df_to_show.csv')
 # Get all country DF
 
 all_country_df = pd.read_csv("upload_data/all_country_df.csv")
-countries = all_country_df['Empfängerland'].unique()
+countries = all_country_df['Recipient Name'].unique()
 
 # Get all country split df
 
@@ -213,10 +213,10 @@ if page == 'Länderanalyse':
     
 
     #Filter by country
-    all_country_df = all_country_df[all_country_df['Empfängerland'].isin(selected_countries)]
+    all_country_df = all_country_df[all_country_df['Recipient Name'].isin(selected_countries)]
 
     # Get Sum_df
-    selected_columns = [col for col in all_country_df.columns if col.startswith('Summe') or col.startswith('Klimarelevante Summe')]
+    selected_columns = [col for col in all_country_df.columns if col.startswith('amount_') or col.startswith('clim_rel_amount_')]
     filtered_df = all_country_df[selected_columns]
     sums = filtered_df.sum()
     sum_df = pd.DataFrame(sums).transpose()
@@ -225,20 +225,20 @@ if page == 'Länderanalyse':
 
     years = range(from_year, (to_year + 1))
     for year in years:
-        amount_col = f'Summe {year}'
-        clim_rel_amount_col = f'Klimarelevante Summe {year}'
+        amount_col = f'amount_{year}'
+        clim_rel_amount_col = f'clim_rel_amount_{year}'
         non_clim_col = f'non_clim_amount_{year}'
         sum_df[non_clim_col] = sum_df[amount_col] - sum_df[clim_rel_amount_col]
 
 
     # Create Stacked Bar
 
-    melted_df = sum_df.melt(value_vars=[f'Klimarelevante Summe {year}' for year in years] + 
+    melted_df = sum_df.melt(value_vars=[f'clim_rel_amount_{year}' for year in years] + 
                                 [f'non_clim_amount_{year}' for year in years],
                                 var_name='Type_Year', value_name='Amount')
 
     melted_df['Year'] = melted_df['Type_Year'].apply(lambda x: x.split('_')[-1])
-    melted_df['Finanzierungstyp'] = melted_df['Type_Year'].apply(lambda x: 'Klimafinanzierung' if 'Klimarelevante Summe' in x else 'Andere ODA')
+    melted_df['Finanzierungstyp'] = melted_df['Type_Year'].apply(lambda x: 'Klimafinanzierung' if 'clim_rel_amount' in x else 'Andere ODA')
 
     melted_df['Amount'] = melted_df['Amount'] * 1_000_000
 
@@ -298,7 +298,7 @@ if page == 'Länderanalyse':
 
     for year in years:
         amount_col = f'amount_{year}'
-        clim_rel_amount_col = f'Klimarelevante Summe {year}'
+        clim_rel_amount_col = f'clim_rel_amount_{year}'
         clim_rel_percent_col = f'clim_rel_percent_{year}'
         
         sum_df[clim_rel_percent_col] = (sum_df[clim_rel_amount_col] / sum_df[amount_col]) * 100
