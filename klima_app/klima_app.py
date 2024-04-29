@@ -72,6 +72,13 @@ sector_per_country_df = pd.read_csv('upload_data/country_sector_analysis.csv')
 
 if page == 'Gesamtübersicht':
 
+    st.write(""" Die Analyse basiert auf Daten aus der OECD CRS Datenbank bis 
+             einschließlich 2022, die Deutschlands bilaterale Entwicklungszusammenarbeit 
+             dokumentieren. Betrachtet wurden die Offiziellen Entwicklungsassistenz-
+             Auszahlungen (ODA) des Bundesministeriums für wirtschaftliche Zusammenarbeit 
+             und Entwicklung (BMZ), angegeben in Millionen USD und zu konstanten Preisen.
+            """)
+
     st.header("Gesamtübersicht")
 
     # Slider
