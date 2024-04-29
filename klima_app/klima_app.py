@@ -322,12 +322,6 @@ if page == 'Gesamtübersicht':
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
         
-        st.dataframe(show_fig)
-
-        year_vals = show_fig['Year'].unique()
-
-        st.write(f'{year_vals}')
-
         fig = px.area(show_fig, x='Year', y='Percentage', color='Grouped Sector',
               labels={'Percentage': 'Percentage of Total'},
               title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year',
@@ -340,9 +334,6 @@ if page == 'Gesamtübersicht':
             yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
         )
 
-        fig.update_xaxes(range=[from_year, to_year])
-
-        # fig.show()
 
         st.plotly_chart(fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
