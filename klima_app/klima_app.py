@@ -321,7 +321,21 @@ if page == 'Gesamtübersicht':
     if st.button("Sektorübersicht erstellen"):
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
+        
         st.dataframe(show_fig)
+
+        fig = px.area(show_fig, x='Year', y='Percentage', color='Grouped Sector',
+              labels={'Percentage': 'Percentage of Total'},
+              title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
+
+        fig.update_layout(
+            paper_bgcolor='white',
+            plot_bgcolor='white',
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
+        )
+
+        fig.show()
 
         # st.plotly_chart(show_fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
