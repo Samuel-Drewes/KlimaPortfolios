@@ -324,6 +324,10 @@ if page == 'Gesamtübersicht':
         
         st.dataframe(show_fig)
 
+        year_vals = show_fig['Year'].unique()
+
+        st.write(f'{year_vals}')
+
         fig = px.area(show_fig, x='Year', y='Percentage', color='Grouped Sector',
               labels={'Percentage': 'Percentage of Total'},
               title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
