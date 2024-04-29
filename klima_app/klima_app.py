@@ -315,7 +315,7 @@ if page == 'Gesamtübersicht':
     if st.button("Sektorübersicht erstellen"):
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
-        st.plotly_chart(show_fig)
+        # st.plotly_chart(show_fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
 
