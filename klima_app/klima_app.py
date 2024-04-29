@@ -61,6 +61,9 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         # Calculate Percent
         
         total_per_year = long_df.groupby('Year')['Amount'].sum().reset_index(name='Total')
+
+        return total_per_year
+
         long_df = pd.merge(long_df, total_per_year, on='Year')
         long_df['Percentage'] = (long_df['Amount'] / long_df['Total']) * 100
 
