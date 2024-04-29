@@ -77,7 +77,7 @@ if page == 'Gesamtübersicht':
              dokumentieren. Betrachtet wurden die Offiziellen Entwicklungsassistenz-
              Auszahlungen (ODA) des Bundesministeriums für wirtschaftliche Zusammenarbeit 
              und Entwicklung (BMZ), angegeben in Millionen USD und zu konstanten Preisen.
-            """)
+            Für weitere Informationen siehe die Methodikerklärungsseite.""")
 
     st.header("Gesamtübersicht")
 
@@ -131,7 +131,7 @@ if page == 'Gesamtübersicht':
 
     chart_type = st.radio(
     "Wählen Sie eine Visualisierungsart",
-    ["Absolute Werte", "Anteilig"],
+    ["Anteilig", "Absolute Werte"],
     )
 
     split_df = split_df[split_df['Year'].between(from_year,to_year)]
@@ -308,7 +308,7 @@ if page == 'Länderanalyse':
 
     chart_type = st.radio(
     "Wählen Sie eine Visualisierungsart",
-    ["Absolute Werte", "Anteilig"],
+    ["Anteilig", "Absolute Werte"],
     )
 
     #Filter by country & Year
