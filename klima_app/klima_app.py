@@ -171,9 +171,7 @@ if page == 'Gesamtübersicht':
 
     st.write(""" Die Analyse basiert auf Daten aus der OECD CRS Datenbank bis 
              einschließlich 2022, die Deutschlands bilaterale Entwicklungszusammenarbeit 
-             dokumentieren. Betrachtet wurden die Offiziellen Entwicklungsassistenz-
-             Auszahlungen (ODA) des Bundesministeriums für wirtschaftliche Zusammenarbeit 
-             und Entwicklung (BMZ), angegeben in Millionen USD und zu konstanten Preisen.
+             dokumentieren. Betrachtet wurden die ODA Meldungen aus dem Haushalt des BMZ.
             Für weitere Informationen siehe die Methodikerklärungsseite.""")
 
     st.header("Gesamtübersicht")
