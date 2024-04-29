@@ -335,6 +335,8 @@ if page == 'Gesamtübersicht':
             yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
         )
 
+        fig.update_xaxes(range=[from_year, to_year])
+
         # fig.show()
 
         st.plotly_chart(fig)
