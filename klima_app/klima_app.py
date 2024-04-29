@@ -78,8 +78,16 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
             paper_bgcolor='white',
             plot_bgcolor='white',
             xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
-        )
+            yaxis=dict(showgrid=False, ticksuffix="%"),
+            legend=dict(
+                x=0.5,
+                y=-0.3,
+                xanchor='center',
+                yanchor='top',
+                orientation='h'
+            ))
+
+
     
         return fig
 
@@ -89,7 +97,13 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
-        )
+        legend=dict(
+                x=0.5,
+                y=-0.3,
+                xanchor='center',
+                yanchor='top',
+                orientation='h'
+            ))
     
     return fig
 
