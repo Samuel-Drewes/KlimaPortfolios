@@ -16,6 +16,77 @@ st.markdown("""
 tick_values = [2e9, 4e9, 6e9, 8e9, 10e9, 12e9]
 tick_labels = ['2 M', '4 M', '6 M', '8 M', '10 M', '12 M']
 
+# Function for Stacked Plotting
+
+def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sectors, abs_or_perc):
+    
+    # Select Category
+    
+    translate_dict = {
+        "Gesamt ODA": "amount",
+        "Klimarelevant": "clim_rel",
+        "Klimaschutz": "clim_miti",
+        "Klimaanpassung": "clim_adapt"
+    }
+    
+    selected_cols = [col for col in full_sector_df.columns if col.startswith(translate_dict[category])]
+    selected_cols.append('Sector')
+    filtered_col_df = full_sector_df[selected_cols]
+    
+    # Select Top_N
+    
+    sector_avg = filtered_col_df.melt(id_vars=['Sector'], var_name='Year', value_name='Amount').groupby('Sector').mean()
+    top_sectors = sector_avg['Amount'].nlargest(top_n_sectors).index.tolist()
+    filtered_col_df['Grouped Sector'] = filtered_col_df['Sector'].apply(lambda x: x if x in top_sectors else 'Andere Sektoren')
+    grouped_df = filtered_col_df.groupby('Grouped Sector').sum().reset_index()
+
+    
+    # Prepare for Plotting
+    
+    long_df = grouped_df.melt(id_vars=['Grouped Sector'], var_name='Year', value_name='Amount')
+    long_df['Year'] = long_df['Year'].str.extract('(\d+)')
+    long_df['Year'] = pd.to_numeric(long_df['Year'])
+    
+    # Year Select
+    
+    long_df = long_df[long_df['Year'].between(year_start,year_end)]
+    
+    # Option for Percentage Plot
+    
+    if abs_or_perc == 'Anteilig':
+        
+        # Calculate Percent
+        
+        total_per_year = long_df.groupby('Year')['Amount'].sum().reset_index(name='Total')
+        long_df = pd.merge(long_df, total_per_year, on='Year')
+        long_df['Percentage'] = (long_df['Amount'] / long_df['Total']) * 100
+        
+        # Create a filled area plot
+
+        fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector',
+                      labels={'Percentage': 'Percentage of Total'},
+                      title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
+
+        fig.update_layout(
+            paper_bgcolor='white',
+            plot_bgcolor='white',
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
+        )
+
+    
+        return fig
+
+    # Create a filled area plot
+    
+    fig = px.area(long_df, x='Year', y='Amount', color='Grouped Sector')
+    fig.update_layout(
+        paper_bgcolor='white',
+        plot_bgcolor='white',
+        )
+    
+    return fig
+
 
 # Overview
 
@@ -140,7 +211,7 @@ if page == 'Gesamtübersicht':
 
 
         fig_split = px.bar(split_df, x='Year', y='Amount', color='Finanzierungstyp',
-                title='Globale Finanzierungssummen',
+                title='Globale Finanzierungssummen aufgeteilt',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
                 category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
@@ -223,6 +294,27 @@ if page == 'Gesamtübersicht':
 
     st.plotly_chart(fig_globe_waterfall)
 
+    # Sector View
+
+    st.markdown(f'<p class="intermediate-font">Sektorübersicht erstellen</p>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        category = st.selectbox("Finanzierungstyp auswählen", options=["Gesamt ODA", "Klimarelevant", "Klimaschutz", "Klimaanpassung"])
+
+    with col2:
+        top_n_sectors = st.slider("Top N Sektoren anzeigen", min_value=2, max_value=10, value=5)
+
+    with col3:
+        abs_or_perc = st.radio("Visualisierungsart", options=['Anteilig', 'Absolute Werte'])
+
+
+    if st.button("Sektorübersicht erstellen"):
+
+        stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
+
+        st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
 
     # DF to show
@@ -319,7 +411,7 @@ if page == 'Länderanalyse':
 
 
         fig_all_split = px.bar(all_country_split_df, x='Year', y='Amount', color='Finanzierungstyp',
-                title='Finanzierungssummen ausgewählte Länder',
+                title='Finanzierungssummen ausgewählte Länder aufgeteilt',
                 labels={'Amount': 'Finanzierungssumme ($)', 'Year': 'Jahr'},
                 category_orders={'Finanzierungstyp': ['Andere ODA','Klimaschutz Finanzierung', 'Klimaanpassung Finanzierung']},
                 color_discrete_map={'Andere ODA': 'orange', 'Klimaschutz Finanzierung': 'green', 'Klimaanpassung Finanzierung': 'blue'}
