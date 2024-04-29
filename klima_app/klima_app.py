@@ -47,7 +47,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     long_df['Year'] = long_df['Year'].str.extract('(\d+)')
     long_df['Year'] = pd.to_numeric(long_df['Year'])
 
-    return long_df
+    return long_df.dropna()
     
     # Year Select
     
