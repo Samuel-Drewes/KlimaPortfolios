@@ -330,7 +330,8 @@ if page == 'Gesamtübersicht':
 
         fig = px.area(show_fig, x='Year', y='Percentage', color='Grouped Sector',
               labels={'Percentage': 'Percentage of Total'},
-              title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
+              title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year',
+              orientation='v')
 
         fig.update_layout(
             paper_bgcolor='white',
