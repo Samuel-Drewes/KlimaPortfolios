@@ -320,8 +320,9 @@ if page == 'Gesamtübersicht':
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
 
+        st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für:\n- Kategorie: {category}\n- Top-Sektoren: {top_n_sectors}\n- Anzeigeart: {abs_or_perc}.")
         st.plotly_chart(show_fig)
-        st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
+
 
 
     # DF to show
