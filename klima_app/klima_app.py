@@ -70,8 +70,8 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         # Create a filled area plot
 
         fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector',
-                      labels={'Percentage': 'Percentage of Total'},
-                      title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year',
+                      labels={'Year': 'Jahr', 'Percentage': 'Prozentsatz', 'Grouped Sector': 'Gruppierte Sektoren'},
+                      title='Flächendiagramm der Sektoren anteilig',
                       orientation='v')
 
         fig.update_layout(
@@ -79,8 +79,9 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
             plot_bgcolor='white',
             xaxis=dict(showgrid=False),
             yaxis=dict(showgrid=False, ticksuffix="%"),
-            height = 1000,
+            height = 600,
             legend=dict(
+                title = 'Legende',
                 x=0.5,
                 y=-0.3,
                 xanchor='center',
@@ -94,12 +95,15 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
 
     # Create a filled area plot
     
-    fig = px.area(long_df, x='Year', y='Amount', color='Grouped Sector', orientation='v')
+    fig = px.area(long_df, x='Year', y='Amount', color='Grouped Sector', orientation='v',
+                  labels={'Year': 'Jahr', 'Amount': 'Betrag', 'Grouped Sector': 'Gruppierte Sektoren'},
+                  title='Flächendiagramm der Sektoren absolute Werte')
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
         height = 600,
         legend=dict(
+                title = 'Legende',
                 x=0.5,
                 y=-0.3,
                 xanchor='center',
