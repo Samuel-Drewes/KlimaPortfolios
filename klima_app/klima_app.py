@@ -335,9 +335,9 @@ if page == 'Gesamtübersicht':
             yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
         )
 
-        fig.show()
+        # fig.show()
 
-        # st.plotly_chart(show_fig)
+        st.plotly_chart(fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
 
