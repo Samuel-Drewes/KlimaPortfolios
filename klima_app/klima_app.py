@@ -32,6 +32,8 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     selected_cols = [col for col in full_sector_df.columns if col.startswith(translate_dict[category])]
     selected_cols.append('Sector')
     filtered_col_df = full_sector_df[selected_cols]
+
+    return filtered_col_df
     
     # Select Top_N
     
