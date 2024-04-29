@@ -40,14 +40,14 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     top_sectors = sector_avg['Amount'].nlargest(top_n_sectors).index.tolist()
     filtered_col_df['Grouped Sector'] = filtered_col_df['Sector'].apply(lambda x: x if x in top_sectors else 'Andere Sektoren')
     grouped_df = filtered_col_df.groupby('Grouped Sector').sum().reset_index()
-
-    return grouped_df
     
     # Prepare for Plotting
     
     long_df = grouped_df.melt(id_vars=['Grouped Sector'], var_name='Year', value_name='Amount')
     long_df['Year'] = long_df['Year'].str.extract('(\d+)')
     long_df['Year'] = pd.to_numeric(long_df['Year'])
+
+    return long_df
     
     # Year Select
     
