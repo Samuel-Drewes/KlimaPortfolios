@@ -79,6 +79,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
             plot_bgcolor='white',
             xaxis=dict(showgrid=False),
             yaxis=dict(showgrid=False, ticksuffix="%"),
+            height = 1000,
             legend=dict(
                 x=0.5,
                 y=-0.3,
@@ -97,6 +98,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
+        height = 600,
         legend=dict(
                 x=0.5,
                 y=-0.3,
