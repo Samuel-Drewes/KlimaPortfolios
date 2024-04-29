@@ -33,10 +33,11 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     selected_cols.append('Sector')
     filtered_col_df = full_sector_df[selected_cols]
 
-    return filtered_col_df
+    # return filtered_col_df
     # Select Top_N
     
-    sector_avg = filtered_col_df.melt(id_vars=['Sector'], var_name='Year', value_name='Amount').groupby('Sector').mean()
+    sector_avg = filtered_col_df.melt(id_vars=['Sector'], var_name='Year', value_name='Amount')
+    # .groupby('Sector').mean()
     
     return(sector_avg)
     
