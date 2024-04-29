@@ -65,6 +65,8 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
 
         long_df = pd.merge(long_df, total_per_year, on='Year')
         long_df['Percentage'] = (long_df['Amount'] / long_df['Total']) * 100
+
+        return long_df
         
         # Create a filled area plot
 
@@ -319,9 +321,9 @@ if page == 'Gesamtübersicht':
     if st.button("Sektorübersicht erstellen"):
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
-        # st.dataframe(show_fig)
+        st.dataframe(show_fig)
 
-        st.plotly_chart(show_fig)
+        # st.plotly_chart(show_fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
 
