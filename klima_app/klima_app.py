@@ -83,7 +83,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
             legend=dict(
                 title = 'Legende',
                 x=0.5,
-                y=-0.3,
+                y=-0.1,
                 xanchor='center',
                 yanchor='top',
                 orientation='h'
@@ -105,7 +105,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         legend=dict(
                 title = 'Legende',
                 x=0.5,
-                y=-0.2,
+                y=-0.1,
                 xanchor='center',
                 yanchor='top',
                 orientation='h'
