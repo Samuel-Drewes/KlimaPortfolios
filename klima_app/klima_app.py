@@ -637,6 +637,17 @@ if page == 'Sektoranalyse Global':
 
     st.header('Sektoranalyse Global')
 
+    css = """
+    <style>
+    div.stSlider > div > div:nth-child(2) > div {
+        background-color: gray !important;
+    }
+    </style>
+    """
+
+    # Inject the CSS with the markdown function
+    st.markdown(css, unsafe_allow_html=True)
+
 
     selected_year = st.slider(
     'Jahr auswählen',
