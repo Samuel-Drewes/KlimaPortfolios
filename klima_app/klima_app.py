@@ -53,7 +53,6 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     
     long_df = long_df[long_df['Year'].between(year_start,year_end)]
     
-    return long_df
 
     # Option for Percentage Plot
     
@@ -61,8 +60,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         
         # Calculate Percent
         
-        total_per_year = long_df.groupby('Year')[['Amount']]
-        # .sum().reset_index(name='Total')
+        total_per_year = long_df[['Year','Amount']].groupby('Year').sum().reset_index().rename(columns = {'Amount': "Total"})
 
         return total_per_year
 
