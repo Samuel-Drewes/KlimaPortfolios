@@ -68,16 +68,17 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         
         # Create a filled area plot
 
-        fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector',
-                      labels={'Percentage': 'Percentage of Total'},
-                      title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
+        fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector')
+        # ,
+        #               labels={'Percentage': 'Percentage of Total'},
+        #               title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
 
-        fig.update_layout(
-            paper_bgcolor='white',
-            plot_bgcolor='white',
-            xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
-        )
+        # fig.update_layout(
+        #     paper_bgcolor='white',
+        #     plot_bgcolor='white',
+        #     xaxis=dict(showgrid=False),
+        #     yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
+        # )
 
     
         return fig
