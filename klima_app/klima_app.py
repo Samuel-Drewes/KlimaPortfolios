@@ -33,7 +33,7 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
     selected_cols.append('Sector')
     filtered_col_df = full_sector_df[selected_cols]
 
-    
+    return filtered_col_df
     # Select Top_N
     
     sector_avg = filtered_col_df.melt(id_vars=['Sector'], var_name='Year', value_name='Amount').groupby('Sector').mean()
@@ -317,6 +317,8 @@ if page == 'Gesamtübersicht':
     if st.button("Sektorübersicht erstellen"):
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
+        st.dataframe(show_fig)
+
         # st.plotly_chart(show_fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
