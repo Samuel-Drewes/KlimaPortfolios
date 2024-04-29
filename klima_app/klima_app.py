@@ -66,28 +66,26 @@ def stacked_area_chart(full_sector_df, year_start, year_end, category, top_n_sec
         long_df = pd.merge(long_df, total_per_year, on='Year')
         long_df['Percentage'] = (long_df['Amount'] / long_df['Total']) * 100
 
-        return long_df
         
         # Create a filled area plot
 
-        fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector')
-        # ,
-        #               labels={'Percentage': 'Percentage of Total'},
-        #               title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year')
+        fig = px.area(long_df, x='Year', y='Percentage', color='Grouped Sector',
+                      labels={'Percentage': 'Percentage of Total'},
+                      title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year',
+                      orientation='v')
 
-        # fig.update_layout(
-        #     paper_bgcolor='white',
-        #     plot_bgcolor='white',
-        #     xaxis=dict(showgrid=False),
-        #     yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
-        # )
-
+        fig.update_layout(
+            paper_bgcolor='white',
+            plot_bgcolor='white',
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
+        )
     
         return fig
 
     # Create a filled area plot
     
-    fig = px.area(long_df, x='Year', y='Amount', color='Grouped Sector')
+    fig = px.area(long_df, x='Year', y='Amount', color='Grouped Sector', orientation='v')
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
@@ -321,21 +319,8 @@ if page == 'Gesamtübersicht':
     if st.button("Sektorübersicht erstellen"):
 
         show_fig = stacked_area_chart(sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
-        
-        fig = px.area(show_fig, x='Year', y='Percentage', color='Grouped Sector',
-              labels={'Percentage': 'Percentage of Total'},
-              title='Stacked Area Plot of Grouped Sector as Percentage of Total per Year',
-              orientation='v')
 
-        fig.update_layout(
-            paper_bgcolor='white',
-            plot_bgcolor='white',
-            xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=False, ticksuffix="%")  # Add a percentage sign to y-axis ticks
-        )
-
-
-        st.plotly_chart(fig)
+        st.plotly_chart(show_fig)
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für {category}, {top_n_sectors} Top-Sektoren, Anzeigeart: {abs_or_perc}.")
 
 
