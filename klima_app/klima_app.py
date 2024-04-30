@@ -533,11 +533,39 @@ if page == 'Länderanalyse':
 
     st.plotly_chart(fig_sel_waterfall)
 
+    # Sector Breakdown
+
+    st.markdown(f'<p class="intermediate-font">Sektorübersicht erstellen</p>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        category = st.selectbox("Finanzierungstyp auswählen", options=["Gesamt ODA", "Klimarelevant", "Klimaschutz", "Klimaanpassung"])
+
+    with col2:
+        top_n_sectors = st.slider("Top N Sektoren anzeigen", min_value=2, max_value=10, value=5)
+
+    with col3:
+        abs_or_perc = st.radio("Visualisierungsart", options=['Anteilig', 'Absolute Werte'])
+
+
+    if st.button("Sektorübersicht erstellen"):
+
+        show_fig = stacked_area_chart(all_country_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
+
+        st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für:\n- Kategorie: {category}\n- Top-Sektoren: {top_n_sectors}\n- Anzeigeart: {abs_or_perc}.")
+        st.plotly_chart(show_fig)
+
+    # Data Download
+
     st.markdown(f'<p class="intermediate-font">Daten zum Download:</p>', unsafe_allow_html=True)
 
     all_country_df_download = all_country_df_download[all_country_df_download['Empfängerland'].isin(selected_countries)]
 
     st.dataframe(all_country_df_download)
+
+
+
 
 if page == 'Ländervergleich':
 
