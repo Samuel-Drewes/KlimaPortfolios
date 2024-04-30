@@ -551,7 +551,9 @@ if page == 'Länderanalyse':
 
     if st.button("Sektorübersicht erstellen"):
 
-        show_fig = stacked_area_chart(all_country_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
+        one_country_sector_df = sector_per_country_df[sector_per_country_df['Recipient Name'].isin(selected_countries)]
+
+        show_fig = stacked_area_chart(one_country_sector_df, from_year, to_year, category, top_n_sectors, abs_or_perc)
 
         st.write(f"Flächendiagramm generiert von {from_year} bis {to_year} für:\n- Kategorie: {category}\n- Top-Sektoren: {top_n_sectors}\n- Anzeigeart: {abs_or_perc}.")
         st.plotly_chart(show_fig)
